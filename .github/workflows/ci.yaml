@@ -25,16 +25,13 @@ jobs:
 
       - name: Install frontend dependencies
         run: |
-          cd Task_Flow_AI_Analytics/frontend
+          cd frontend
           npm install
-
       - name: Run frontend lint
         run: |
-            cd Task_Flow_AI_Analytics/frontend
+            cd frontend
             npm run lint
-
       - name: Build frontend with Vite
         run: |
-          cd Task_Flow_AI_Analytics/frontend
-          npm run build 
-
+          cd frontend
+          npm run build
