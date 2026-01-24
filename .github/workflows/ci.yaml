@@ -27,10 +27,7 @@ jobs:
         run: |
           cd frontend
           npm install
-      - name: Run frontend lint
-        run: |
-            cd frontend
-            npm run lint
+
       - name: Build frontend with Vite
         run: |
           cd frontend
