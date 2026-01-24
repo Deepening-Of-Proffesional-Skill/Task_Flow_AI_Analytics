@@ -1,0 +1,133 @@
+// frontend/src/components/TaskForm.jsx
+import React, { useState } from 'react';
+import { useTaskOperations } from '../hooks/useTaskOperations';
+import { useTaskContext } from '../context/TaskContext';
+import PrioritySelector from './PrioritySelector';
+
+const TaskForm = () => {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    priority: 1,
+    deadline: ''
+  });
+  
+  const [errors, setErrors] = useState({});
+  const { createTask, loading } = useTaskOperations();
+  const { dispatch } = useTaskContext();
+
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!formData.title.trim()) {
+      newErrors.title = 'Title is required';
+    }
+    
+    if (formData.title.length > 255) {
+      newErrors.title = 'Title must be less than 255 characters';
+    }
+    
+    if (formData.deadline && new Date(formData.deadline) < new Date()) {
+      newErrors.deadline = 'Deadline cannot be in the past';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!validateForm()) return;
+
+    try {
+      const newTask = await createTask(formData);
+      dispatch({ type: 'ADD_TASK', payload: newTask });
+      setFormData({
+        title: '',
+        description: '',
+        priority: 1,
+        deadline: ''
+      });
+    } catch (error) {
+      console.error('Error creating task:', error);
+    }
+  };
+
+  const handleChange = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 className="text-xl font-semibold mb-4">Add New Task</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Title *
+          </label>
+          <input
+            type="text"
+            value={formData.title}
+            onChange={(e) => handleChange('title', e.target.value)}
+            className={`w-full px-3 py-2 border rounded-md ${
+              errors.title ? 'border-red-500' : 'border-gray-300'
+            }`}
+            placeholder="Enter task title"
+          />
+          {errors.title && (
+            <p className="text-red-500 text-sm mt-1">{errors.title}</p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Description
+          </label>
+          <textarea
+            value={formData.description}
+            onChange={(e) => handleChange('description', e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            rows="3"
+            placeholder="Enter task description (optional)"
+          />
+        </div>
+
+        <PrioritySelector
+          value={formData.priority}
+          onChange={(value) => handleChange('priority', value)}
+        />
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Deadline
+          </label>
+          <input
+            type="date"
+            value={formData.deadline}
+            onChange={(e) => handleChange('deadline', e.target.value)}
+            className={`w-full px-3 py-2 border rounded-md ${
+              errors.deadline ? 'border-red-500' : 'border-gray-300'
+            }`}
+          />
+          {errors.deadline && (
+            <p className="text-red-500 text-sm mt-1">{errors.deadline}</p>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {loading ? 'Creating...' : 'Create Task'}
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default TaskForm;
