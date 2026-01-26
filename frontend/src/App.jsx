@@ -1,11 +1,17 @@
-import React from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import SignInForm from "./components/SignIn"
+import Home from "./components/Home"
 
 function App() {
 
   return (
     <>
-     <SignInForm/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<SignInForm />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
