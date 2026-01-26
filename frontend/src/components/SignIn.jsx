@@ -8,6 +8,7 @@ import Card from "react-bootstrap/Card";
 import "../css/signIn.css";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,8 @@ const SignInForm = () => {
   });
   //err state
   const [error, setError] = useState("");
+
+  const navigate = useNavigate()
 
   //onSubmit function
   const signInSubmit = async (e) => {
@@ -39,6 +42,7 @@ const SignInForm = () => {
       if (response.data.message) {
         console.log(response.data.message);
         alert("successfully added");
+        navigate("/login")
       }
     } catch (error) {
       setError(
