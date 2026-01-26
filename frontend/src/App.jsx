@@ -1,13 +1,12 @@
-import React from "react"
-import SignInForm from "./components/SignIn"
+import React from "react";
+import SignInForm from "./components/SignIn";
 
 function App() {
-
   return (
     <>
-     <SignInForm/>
+      <SignInForm />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
