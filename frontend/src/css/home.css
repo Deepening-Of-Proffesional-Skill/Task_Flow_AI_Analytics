@@ -15,7 +15,7 @@ h1 {
 }
 
 .container {
-  max-width: 720px !important;   
+  max-width: 760px !important;   
   padding: 0 1rem;
 }
 
@@ -26,7 +26,7 @@ h1 {
   overflow: hidden;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
   transition: all 0.22s ease;
-  position: relative;
+  margin-bottom: 1.5rem
 }
 
 .card:hover {
@@ -35,38 +35,58 @@ h1 {
 }
 
 .card-body {
-  padding: 1.5rem;
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 1.25rem;
-  align-items: center;
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
 }
 
 .card .due-date {
   background: linear-gradient(135deg, #1e1e1e 0%, #0f0f0f 100%);
   border-radius: 10px;
-  padding: 0.9rem 0.8rem;
+  padding: 0.95rem 1rem;
   text-align: center;
   border: 1px solid #333;
   font-family: 'Consolas', 'Courier New', monospace;
   color: #a0d2ff;
   font-weight: bold;
-  font-size: 1.05rem;
-  letter-spacing: 0.5px;
+  font-size: 1.15rem;
+  letter-spacing: 0.6px;
   box-shadow: inset 0 2px 6px rgba(0,0,0,0.7);
+  align-self: center;         
+  min-width: 160px;
+  margin-bottom: 0.4rem;
 }
 
-.card-title {
-  margin: 0;
-  font-size: 1.3rem;
+.task-item {
+  padding: 0.9rem 1.1rem;
+  background: #1a1a1a;
+  border-radius: 8px;
+  border-left: 4px solid #444;
+  transition: all 0.18s ease;
+  margin-bottom: 2%;
+}
+
+.task-item:hover {
+  background: #222;
+  border-left-color: #00aaff;
+  transform: translateX(4px);
+}
+
+.task-item .card-title {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.18rem;
   font-weight: 600;
   color: #f0f0f0;
-  letter-spacing: -0.2px;
 }
 
-.card-subtitle .title {
-  color: #ddd;
-  font-weight: 500;
+.task-item .card-subtitle {
+  color: #aaa;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
 }
 
 /* Responsive */

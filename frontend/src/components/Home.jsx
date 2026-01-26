@@ -62,19 +62,19 @@ export default function Home() {
         <h1>Task List</h1>
         <Container>
             {Object.keys(groupedByDate).map((date) => (
-                <Card key={date} className="mb-3">
+                <Card key={date} className="mb-4">
                     <Card.Body>
                         <div className="due-date">
                             {date}
                         </div>
-                        <div>
+                        <div className='d-flex flex-column gap-2'>
                             {groupedByDate[date].map((task) => (
-                                <div key={task.id} className="task-item">
+                                <div key={task.id} className="task-item p-2 border rounded">
                                     <Card.Title className="mb-1">
                                         {task.title}
                                     </Card.Title>
                             
-                                    <Card.Subtitle className="mb-2">
+                                    <Card.Subtitle className="d-flex align-items-center gap-2">
                                         <span className="title">{task.status}</span>
                                     </Card.Subtitle>
                                 </div>
