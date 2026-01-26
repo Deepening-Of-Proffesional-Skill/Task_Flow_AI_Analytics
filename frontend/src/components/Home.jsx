@@ -25,28 +25,60 @@ export default function Home() {
             description: "Configure the PostgreSQL database for the application.",
             status: "Completed",
             dueDate: "2026-01-28"
+        },
+        {
+            id: 4,
+            title: "Implement User Dashboard",
+            description: "Create a user dashboard to display account information and activity.",
+            status: "In Progress",
+            dueDate: "2026-01-28"
+        },
+        {
+            id: 5,
+            title: "Write Unit Tests",
+            description: "Develop unit tests for the API endpoints and database interactions.",
+            status: "Not Started",
+            dueDate: "2026-02-05"
         }
     ];
-    tasks.sort((a,b) => new Date(a.dueDate) - new Date(b.dueDate));
+    
+    const sortedTasks = [...tasks].sort(
+        (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+    );
+
+    const groupedByDate = sortedTasks.reduce((groups, task) => {
+        const date = task.dueDate;
+
+        if (!groups[date]) {
+            groups[date] = [];
+        }
+
+        groups[date].push(task);
+        return groups;
+    }, {});
 
   return (
     <div className='py-4'>
         <h1>Task List</h1>
         <Container>
-            {tasks.map((task) => (
-                <Card key={task.id} className="mb-3">
+            {Object.keys(groupedByDate).map((date) => (
+                <Card key={date} className="mb-3">
                     <Card.Body>
                         <div className="due-date">
-                            {task.dueDate}
+                            {date}
                         </div>
                         <div>
-                            <Card.Title className="mb-1">
-                                {task.title}
-                            </Card.Title>
+                            {groupedByDate[date].map((task) => (
+                                <div key={task.id} className="task-item">
+                                    <Card.Title className="mb-1">
+                                        {task.title}
+                                    </Card.Title>
                             
-                            <Card.Subtitle className="mb-2">
-                                <span className="title">{task.title}</span>
-                            </Card.Subtitle>
+                                    <Card.Subtitle className="mb-2">
+                                        <span className="title">{task.status}</span>
+                                    </Card.Subtitle>
+                                </div>
+                            ))}
                         </div>
                     </Card.Body>
                 </Card>
