@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from 'react-bootstrap/esm/Container';
 import Card from 'react-bootstrap/esm/Card';
-import '../css/Home.css';
+import '../css/home.css';
 
 export default function Home() {
     const tasks = [
