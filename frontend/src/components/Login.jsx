@@ -7,8 +7,48 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import "../css/signIn.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LogIn = () => {
+  const [logInForm, setLogInForm] = useState({
+    email: "",
+    password: "",
+  });
+  //for err msg
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  //login submit
+  const logInSubmit = async (e) => {
+    e.preventDefault();
+    console.log("login btn clicked");
+
+    //destructure login form
+    const { email, password } = logInForm;
+    console.log(logInForm);
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+    try {
+      const response = await axios.post("http://localhost:3000/user/login", {
+        email: email,
+        password: password,
+      });
+      if (response.data.message) {
+        console.log(response.data.message);
+        console.log("successfully looged in");
+        // alert("successfully looged in");
+        navigate("/home");
+      }
+    } catch (error) {
+      setError(error.response?.data?.error || "logIn failed. Try again later.");
+      console.error(error);
+    }
+  };
+
   return (
     <div className="signin-container">
       <Container>
@@ -17,13 +57,18 @@ const LogIn = () => {
             <Card className="signin-card">
               <Card.Body>
                 <h3 className="signin-title">Login</h3>
-                <Form>
+                {error && <p className="text-danger">{error}</p>}
+                <Form onSubmit={logInSubmit}>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
                       type="email"
                       placeholder="Enter your email"
                       className="signin-input"
+                      value={logInForm.email}
+                      onChange={(e) =>
+                        setLogInForm({ ...logInForm, email: e.target.value })
+                      }
                     />
                   </Form.Group>
                   <Form.Group className="mb-4" controlId="formBasicPassword">
@@ -32,6 +77,10 @@ const LogIn = () => {
                       type="password"
                       placeholder="Enter your password"
                       className="signin-input"
+                      value={logInForm.password}
+                      onChange={(e) =>
+                        setLogInForm({ ...logInForm, password: e.target.value })
+                      }
                     />
                   </Form.Group>
                   <div className="d-grid">
