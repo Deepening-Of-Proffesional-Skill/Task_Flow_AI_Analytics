@@ -38,3 +38,36 @@ export const registerUser = async (req, res) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+export const logInUser = async (req, res) => {
+  try {
+    //extract user details from the request body
+    const { email, password } = req.body;
+
+    //validate input
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
+
+    //call Supabase's signInWithPassword method for login
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    //handle errors from Supabase
+    if (error) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    //respond with success
+    return res.status(200).json({
+      message: 'User logged in successfully',
+      user: data.user,
+    });
+  } catch (err) {
+    console.error(err);
+    //andle unexpected errors
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
