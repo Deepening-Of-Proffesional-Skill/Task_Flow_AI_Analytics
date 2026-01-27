@@ -42,7 +42,7 @@ const SignInForm = () => {
       if (response.data.message) {
         console.log(response.data.message);
         alert("successfully added");
-        navigate("/login")
+        navigate("/")
       }
     } catch (error) {
       setError(
