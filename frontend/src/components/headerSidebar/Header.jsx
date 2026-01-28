@@ -1,6 +1,8 @@
+import React from "react";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { FaUserCircle, FaBars, FaSignOutAlt} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import '../../css/header.css';
 
 export default function Header({ toggleSidebar }) {
@@ -53,3 +55,7 @@ export default function Header({ toggleSidebar }) {
     </Navbar>
   );
 }
+
+Header.propTypes = {
+  toggleSidebar: PropTypes.func.isRequired,
+};

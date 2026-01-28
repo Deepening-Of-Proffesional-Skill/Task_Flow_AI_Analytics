@@ -1,9 +1,10 @@
+import React from "react";
 import { Nav, Offcanvas } from "react-bootstrap";
+import PropTypes from "prop-types";
 import { Link, useLocation } from 'react-router-dom';
 import { 
   FaTachometerAlt,
   FaBook,
-  FaUsers,
   FaChartBar,
   FaUser,
   FaUniversity
@@ -85,3 +86,8 @@ export default function Sidebar({ show, onHide }) {
     </>
   );
 }
+
+Sidebar.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
+};
