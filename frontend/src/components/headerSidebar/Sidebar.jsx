@@ -9,7 +9,7 @@ import {
   FaUser,
   FaUniversity
 } from "react-icons/fa";
-import '../../css/sidebar.css';
+import '../../css/Sidebar.css';
 import { useEffect } from "react";
 
 export default function Sidebar({ show, onHide }) {

@@ -3,7 +3,7 @@ import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { FaUserCircle, FaBars, FaSignOutAlt} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import '../../css/header.css';
+import '../../css/Header.css';
 
 export default function Header({ toggleSidebar }) {
   const navigate = useNavigate();
