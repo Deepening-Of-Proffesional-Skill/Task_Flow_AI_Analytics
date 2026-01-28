@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignInForm from "./components/SignIn";
 import LogIn from "./components/Login";
-import Home from "./components/Home";
+import Home from "./components/showTasks/Home";
 
 function App() {
   return (
