@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Card, Container } from "react-bootstrap";
 import { getWeekYear } from "../../utils/weekUtils";
 export default function WeeklyTasks({ sortedTasks }) {
