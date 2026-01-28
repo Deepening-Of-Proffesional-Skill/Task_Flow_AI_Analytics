@@ -16,7 +16,7 @@ export default function WeeklyTasks({ sortedTasks }) {
   }, {});
 
   return (
-    <Container>
+    <Container className="tasks-wrapper">
         {Object.entries(groupedByWeek).map(([key, group]) => (
             <Card key={key} className="mb-4">
                 <Card.Body>
@@ -26,7 +26,7 @@ export default function WeeklyTasks({ sortedTasks }) {
 
                     <div className='d-flex flex-column gap-2'>
                         {group.tasks.map((task) => (
-                            <div key={task.id} className="task-item p-2 border rounded">
+                            <div key={task.id} className="task-item  border rounded">
                                 <Card.Title className="mb-1">
                                     {task.title}
                                 </Card.Title>
