@@ -41,3 +41,7 @@ export default function DailyTasks({ sortedTasks }) {
     </Container>
   )
 }
+
+DailyTasks.propTypes = {
+  sortedTasks: PropTypes.array.isRequired,
+};
