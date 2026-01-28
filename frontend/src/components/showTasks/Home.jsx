@@ -1,8 +1,11 @@
 import '../../css/home.css';
 import DailyTasks from './DailyTasks';
 import WeeklyTasks from './WeeklyTasks';
+import { useState } from 'react';
+import '../../css/tabs.css';
 
 export default function Home() {
+    const [activeTab, setActiveTab] = useState('daily');
     const tasks = [
         {
             id: 1,
@@ -71,10 +74,49 @@ export default function Home() {
   return (
     <div className='py-4'>
         <h1>Task List</h1>
+        <div className='tabs-container'> 
+            <div className="mode-switch" role="tablist">
+                <button 
+                    type='button'
+                    id="tab-daily"
+                    className={`mode-btn ${activeTab === 'daily' ? 'active' : ''}`} 
+                    onClick={() => setActiveTab('daily')}
+                    aria-selected={activeTab === 'daily'}
+                    aria-controls="daily-panel"
+                    role="tab"
+                >
+                    Daily Tasks
+                </button>
+                <button 
+                    type='button'
+                    id="tab-weekly"
+                    className={`mode-btn ${activeTab === 'weekly' ? 'active' : ''}`} 
+                    onClick={() => setActiveTab('weekly')}
+                    aria-selected={activeTab === 'weekly'}
+                    aria-controls="weekly-panel"
+                    role="tab"
+                >
+                    Weekly Tasks
+                </button>
+            </div>
+        </div>
         
-        <DailyTasks sortedTasks={sortedTasks} />
-        <WeeklyTasks sortedTasks={sortedTasks} />
-        
+        <div
+            id="daily-panel"
+            role="tabpanel"
+            aria-labelledby='tab-daily'
+            hidden={activeTab !== 'daily'}
+        >            
+            <DailyTasks sortedTasks={sortedTasks} />
+        </div>
+        <div
+            id="weekly-panel"
+            role="tabpanel"
+            aria-labelledby='tab-weekly'
+            hidden={activeTab !== 'weekly'}
+        >
+            <WeeklyTasks sortedTasks={sortedTasks} />
+        </div>          
     </div>
   )
 }
