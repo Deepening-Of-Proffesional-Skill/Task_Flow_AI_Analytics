@@ -1,3 +1,4 @@
+import React from "react";
 import '../../css/home.css';
 import DailyTasks from './DailyTasks';
 import WeeklyTasks from './WeeklyTasks';
