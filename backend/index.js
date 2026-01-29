@@ -4,6 +4,8 @@ import cors from 'cors';
 
 //import the user router
 import userRouter from './routes/user.js';
+//import the fetchTasks router
+import fetchTasksRouter from './routes/fetchTasks.js';
 
 //configure environment variables
 dotenv.config();
@@ -18,6 +20,8 @@ app.use(express.json());
 
 //register the user router
 app.use('/user', userRouter);
+//register the fetchTasks router
+app.use('/tasks', fetchTasksRouter);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the backend server!');
