@@ -1,4 +1,4 @@
-import supabase from "../utils/supabaseClient";
+import supabase from "../utils/supabaseClient.js";
 
 async function fetchTasks(userId) {
     const { data, error } = await supabase
@@ -12,7 +12,7 @@ async function fetchTasks(userId) {
             throw err;
         } 
         if (!data || data.length === 0 ) {
-            const err = new Error('No tasks found for the user');
+            const err = new Error(`No tasks found for the user ${userId}`);
             err.status = 404;
             throw err;
         }

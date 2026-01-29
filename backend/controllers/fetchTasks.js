@@ -1,4 +1,4 @@
-import fetchTasks from "../services/fetchTasks";
+import fetchTasks from "../services/fetchTasks.js";
 
 async function getTasks(req, res) {
     try {
