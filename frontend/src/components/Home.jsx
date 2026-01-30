@@ -2,6 +2,7 @@ import React from 'react'
 import Container from 'react-bootstrap/esm/Container';
 import Card from 'react-bootstrap/esm/Card';
 import '../css/home.css';
+import LogOut from './LogOut';
 
 export default function Home() {
     const tasks = [
@@ -59,6 +60,7 @@ export default function Home() {
 
   return (
     <div className='py-4'>
+        <LogOut/>
         <h1>Task List</h1>
         <Container>
             {Object.keys(groupedByDate).map((date) => (
