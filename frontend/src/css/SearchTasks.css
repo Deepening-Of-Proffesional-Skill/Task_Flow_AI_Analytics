@@ -1,0 +1,96 @@
+.search-tasks-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.search-tasks-wrapper .row {
+  align-items: center;
+}
+
+.search-tasks-input-group {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #18181c;
+  border: 1px solid #2a2a2a;
+  transition: all 0.22s ease;
+  height: 54px; 
+}
+
+.search-tasks-input-group:focus-within {
+  border-color: #00aaff;
+  box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.18);
+}
+
+.search-tasks-input-icon {
+  background: #1e1e24;
+  border: none;
+  color: #bbb;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0 1.2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  border-radius: 12px 0 0 12px;
+}
+
+.search-tasks-search-input {
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  height: 100%;
+  padding: 0 1rem;
+  font-size: 1rem;
+}
+
+.search-tasks-search-input::placeholder {
+  color: #888;
+}
+
+.search-tasks-date-input {
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  height: 100%;
+  padding: 0 1rem;
+  font-size: 1rem;
+  border-radius: 0 12px 12px 0;
+}
+
+.search-tasks-search-input:focus,
+.search-tasks-date-input:focus {
+  background: transparent !important;
+  color: #fff !important;
+  border-color: #00aaff !important;
+  box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.18) !important;
+}
+
+.search-tasks-date-input::-webkit-calendar-picker-indicator {
+  filter: invert(0.85) brightness(1.8) hue-rotate(180deg) !important;
+  opacity: 1 !important;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 767px) {
+  .search-tasks-wrapper {
+    padding: 0 0.75rem;
+  }
+
+  .search-tasks-input-group {
+    height: 50px;
+  }
+
+  .search-tasks-input-icon {
+    padding: 0 1rem;
+    font-size: 0.9rem;
+  }
+
+  .search-tasks-search-input,
+  .search-tasks-date-input {
+    font-size: 0.95rem;
+  }
+}
