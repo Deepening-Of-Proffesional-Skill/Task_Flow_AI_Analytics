@@ -4,6 +4,7 @@ import DailyTasks from './DailyTasks';
 import WeeklyTasks from './WeeklyTasks';
 import { useState } from 'react';
 import '../../css/tabs.css';
+import SearchTasks from "./SearchTasks";
 
 export default function Home() {
     const [activeTab, setActiveTab] = useState('daily');
@@ -99,6 +100,17 @@ export default function Home() {
                 >
                     Weekly Tasks
                 </button>
+                <button 
+                    type='button'
+                    id="tab-search"
+                    className={`mode-btn ${activeTab === 'search' ? 'active' : ''}`} 
+                    onClick={() => setActiveTab('search')}
+                    aria-selected={activeTab === 'search'}
+                    aria-controls="search-panel"
+                    role="tab"
+                >
+                    Search Tasks
+                </button>
             </div>
         </div>
         
@@ -117,7 +129,15 @@ export default function Home() {
             hidden={activeTab !== 'weekly'}
         >
             <WeeklyTasks sortedTasks={sortedTasks} />
-        </div>          
+        </div>  
+        <div
+            id="search-panel"
+            role="tabpanel"
+            aria-labelledby='tab-search'
+            hidden={activeTab !== 'search'}
+        >
+            <SearchTasks />
+        </div>        
     </div>
   )
 }
