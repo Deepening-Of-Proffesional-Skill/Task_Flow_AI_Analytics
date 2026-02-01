@@ -4,6 +4,7 @@ import cors from 'cors';
 
 //import the user router
 import userRouter from './routes/user.js';
+import authRoutes from "./middleware/auth.js";
 
 //configure environment variables
 dotenv.config();
@@ -18,6 +19,8 @@ app.use(express.json());
 
 //register the user router
 app.use('/user', userRouter);
+//use the auth routes
+app.use("/auth", authRoutes);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the backend server!');
