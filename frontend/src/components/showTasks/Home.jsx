@@ -75,7 +75,7 @@ export default function Home() {
 
   return (
     <div className='py-4'>
-        <h1>Task List</h1>
+        <h1>My Tasks</h1>
         <div className='tabs-container'> 
             <div className="mode-switch" role="tablist">
                 <button 
