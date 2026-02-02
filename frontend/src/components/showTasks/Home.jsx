@@ -5,9 +5,22 @@ import WeeklyTasks from './WeeklyTasks';
 import { useState } from 'react';
 import '../../css/tabs.css';
 import SearchTasks from "./SearchTasks";
+import LogOut from "../LogOut";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Home() {
     const [activeTab, setActiveTab] = useState('daily');
+    const navigate = useNavigate();
+    /*
+    //authentication check
+    useEffect(() => {
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+        navigate("/"); //Redirect to login if no token is found
+        }
+    }, [navigate]);
+*/
     const tasks = [
         {
             id: 1,
