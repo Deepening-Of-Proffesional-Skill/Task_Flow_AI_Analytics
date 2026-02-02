@@ -1,6 +1,6 @@
 // backend/routes/tasks.js
 import express from 'express';
-import taskController from '../controllers/taskController.js';
+import taskController from '../controllers/taskModificationController.js';
 import { authenticateToken } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
