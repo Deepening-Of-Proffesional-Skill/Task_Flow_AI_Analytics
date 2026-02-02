@@ -6,6 +6,7 @@ import cors from 'cors';
 import userRouter from './routes/user.js';
 //import the fetchTasks router
 import fetchTasksRouter from './routes/fetchTasks.js';
+import authRoutes from "./middleware/auth.js";
 
 //configure environment variables
 dotenv.config();
@@ -22,6 +23,8 @@ app.use(express.json());
 app.use('/user', userRouter);
 //register the fetchTasks router
 app.use('/tasks', fetchTasksRouter);
+//use the auth routes
+app.use("/auth", authRoutes);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the backend server!');
