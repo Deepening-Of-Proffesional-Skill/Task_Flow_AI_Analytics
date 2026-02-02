@@ -27,8 +27,16 @@ export const validateTaskInput = (data) => {
     const isValidDate = !isNaN(Date.parse(data.deadline));
     if (!isValidDate) {
       errors.deadline = 'Invalid date format';
-    } else if (new Date(data.deadline) < new Date()) {
-      errors.deadline = 'Deadline cannot be in the past';
+    } else {
+      // Compare dates at day level (start of day)
+      const deadlineDate = new Date(data.deadline);
+      const today = new Date();
+      deadlineDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+      
+      if (deadlineDate < today) {
+        errors.deadline = 'Deadline cannot be in the past';
+      }
     }
   }
 

@@ -1,6 +1,6 @@
 // frontend/src/components/TaskList.jsx
 import React from 'react';
-import TaskItem from './TaskItem';
+import TaskItem from './TaskModItem';
 
 const TaskList = ({ tasks, loading, error }) => {
   if (loading) {

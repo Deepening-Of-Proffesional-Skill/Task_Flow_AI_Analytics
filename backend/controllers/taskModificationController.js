@@ -114,7 +114,7 @@ class TaskController {
   async deleteTask(req, res) {
     try {
       const { id } = req.params;
-      const userId = req.user.id;
+      const userId = 'default-user'; // Placeholder until auth is implemented
       
       await taskService.deleteTask(id, userId);
       
@@ -142,7 +142,7 @@ class TaskController {
 
   async getTaskStats(req, res) {
     try {
-      const userId = req.user.id;
+      const userId = 'default-user'; // Placeholder until auth is implemented
       const stats = await taskService.getTaskStats(userId);
       
       res.status(200).json({

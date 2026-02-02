@@ -1,15 +1,16 @@
 // frontend/src/components/TaskForm.jsx
 import React, { useState } from 'react';
-import { useTaskOperations } from '../hooks/useTaskOperations';
+import { useTaskOperations } from '../hooks/useTaskOperationsMod';
 import { useTaskContext } from '../context/TaskContext';
-import PrioritySelector from './PrioritySelector';
+import PrioritySelector from './PriorityModSelector';
 
 const TaskForm = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     priority: 1,
-    deadline: ''
+    deadline: '',
+    status: 'pending'
   });
   
   const [errors, setErrors] = useState({});
@@ -27,8 +28,16 @@ const TaskForm = () => {
       newErrors.title = 'Title must be less than 255 characters';
     }
     
-    if (formData.deadline && new Date(formData.deadline) < new Date()) {
-      newErrors.deadline = 'Deadline cannot be in the past';
+    if (formData.deadline) {
+      const deadlineDate = new Date(formData.deadline);
+      const today = new Date();
+      // Set both to start of day for fair comparison
+      deadlineDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+      
+      if (deadlineDate < today) {
+        newErrors.deadline = 'Deadline cannot be in the past';
+      }
     }
     
     setErrors(newErrors);
@@ -41,14 +50,22 @@ const TaskForm = () => {
     if (!validateForm()) return;
 
     try {
-      const newTask = await createTask(formData);
-      dispatch({ type: 'ADD_TASK', payload: newTask });
-      setFormData({
-        title: '',
-        description: '',
-        priority: 1,
-        deadline: ''
-      });
+      const response = await createTask(formData);
+      // Backend returns { success, message, task }
+      console.log('Create task response:', response);
+      const newTask = response.task;
+      
+      if (newTask) {
+        dispatch({ type: 'ADD_TASK', payload: newTask });
+        console.log('Task added to state:', newTask);
+        setFormData({
+          title: '',
+          description: '',
+          priority: 1,
+          deadline: '',
+          status: 'pending'
+        });
+      }
     } catch (error) {
       console.error('Error creating task:', error);
     }
@@ -62,8 +79,8 @@ const TaskForm = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-      <h2 className="text-xl font-semibold mb-4">Add New Task</h2>
+    <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">Add New Task</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
