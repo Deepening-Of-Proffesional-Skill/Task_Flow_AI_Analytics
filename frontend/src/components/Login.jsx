@@ -37,8 +37,9 @@ const LogIn = () => {
         email: email,
         password: password,
       });
-      if (response.data.message) {
-        console.log(response.data.message);
+      if (response.data.token) {
+        localStorage.setItem("authToken", response.data.token);
+        console.log(response.data.token);
         console.log("successfully looged in");
         // alert("successfully looged in");
         navigate("/home");
