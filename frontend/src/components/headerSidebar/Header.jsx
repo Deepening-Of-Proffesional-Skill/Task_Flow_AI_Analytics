@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
-import { FaUserCircle, FaBars, FaSignOutAlt} from "react-icons/fa";
+import { FaUserCircle, FaBars} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import '../../css/Header.css';
