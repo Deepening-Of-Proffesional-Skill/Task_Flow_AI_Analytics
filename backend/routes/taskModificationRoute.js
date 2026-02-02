@@ -1,12 +1,10 @@
 // backend/routes/tasks.js
 import express from 'express';
 import taskController from '../controllers/taskModificationController.js';
-import { authenticateToken } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// All routes require authentication
-router.use(authenticateToken);
+// Note: Authentication will be added by my team member
 
 // GET /api/tasks - Get all tasks for authenticated user
 router.get('/', taskController.getAllTasks);

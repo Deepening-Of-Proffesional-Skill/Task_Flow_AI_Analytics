@@ -4,7 +4,7 @@ import taskService from '../services/taskService.js';
 class TaskController {
   async getAllTasks(req, res) {
     try {
-      const userId = req.user.id;
+      const userId = 'default-user'; // Placeholder until auth is implemented
       const tasks = await taskService.getAllTasks(userId);
       
       res.status(200).json({
@@ -25,7 +25,7 @@ class TaskController {
   async getTaskById(req, res) {
     try {
       const { id } = req.params;
-      const userId = req.user.id;
+      const userId = 'default-user'; // Placeholder until auth is implemented
       
       const task = await taskService.getTaskById(id, userId);
       
@@ -45,7 +45,7 @@ class TaskController {
 
   async createTask(req, res) {
     try {
-      const userId = req.user.id;
+      const userId = 'default-user'; // Placeholder until auth is implemented
       const taskData = req.body;
       
       // Ensure user can only create tasks for themselves
@@ -77,7 +77,7 @@ class TaskController {
   async updateTask(req, res) {
     try {
       const { id } = req.params;
-      const userId = req.user.id;
+      const userId = 'default-user'; // Placeholder until auth is implemented
       const taskData = req.body;
       
       const task = await taskService.updateTask(id, taskData, userId);
