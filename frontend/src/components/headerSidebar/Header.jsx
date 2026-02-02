@@ -4,14 +4,11 @@ import { FaUserCircle, FaBars, FaSignOutAlt} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import '../../css/Header.css';
+import Logout from "../LogOut";
 
 export default function Header({ toggleSidebar }) {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // clear auth token / state / redirect
-    navigate("/");
-  };
 
   return (
     <Navbar variant="dark" expand="md" className="main-navbar">
@@ -42,14 +39,7 @@ export default function Header({ toggleSidebar }) {
             <FaUserCircle size={28} />
           </Button>
 
-          <Button
-            variant="link"
-            className="text-light p-0 logout-btn"
-            onClick={handleLogout}
-            title="Log out"
-          >
-            <FaSignOutAlt size={24} />
-          </Button>
+          <Logout/>
         </Nav>
       </Container>
     </Navbar>
