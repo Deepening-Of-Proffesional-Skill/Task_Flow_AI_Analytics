@@ -1,8 +1,9 @@
 // frontend/src/context/TaskContext.jsx
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { useTasks } from '../hooks/useTasks';
+import { useTasks } from '../hooks/useTasksMod';
 
-const TaskContext = createContext();
+export const TaskContext = createContext();
 
 const taskReducer = (state, action) => {
   switch (action.type) {
