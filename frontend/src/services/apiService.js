@@ -10,17 +10,6 @@ const apiService = axios.create({
   },
 });
 
-// Interceptor to add auth token (disabled until auth is implemented)
-// apiService.interceptors.request.use(
-//   (config) => {
-//     const token = localStorage.getItem('authToken');
-//     if (token) {
-//       config.headers.Authorization = `Bearer ${token}`;
-//     }
-//     return config;
-//   },
-//   (error) => Promise.reject(error)
-// );
 
 // Response interceptor for better error handling
 apiService.interceptors.response.use(
