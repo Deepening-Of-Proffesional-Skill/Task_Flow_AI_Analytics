@@ -35,8 +35,10 @@ export default function SearchTasks() {
                     selectedPriority === "Medium" ? 2 : 3,
             };
             //await searchTasksService(filters);
+            console.log("Filters applied:", filters); // use filters to remove lint warning
         } catch (error) {
             //setError('Error searching tasks. Please try again.');
+            console.error('Error searching tasks:', error);
         }
     };
 

@@ -32,6 +32,7 @@ export default function Home() {
                 setAllTasks(tasks);
             } catch (error) {
                 setErrorTask('Failed to fetch tasks. Please try again later.');
+                console.error('Error fetching tasks:', error);
             }
         };
 
