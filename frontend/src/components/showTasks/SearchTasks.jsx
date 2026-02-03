@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Container, Dropdown, DropdownItem, Form, InputGroup, Row, Card, Button} from 'react-bootstrap'
 import { useState } from 'react';
-import '../../css/searchTasks.css';
+import '../../css/SearchTasks.css';
 
 export default function SearchTasks() {
     const [searchTask, setSearchTask] = useState('');
