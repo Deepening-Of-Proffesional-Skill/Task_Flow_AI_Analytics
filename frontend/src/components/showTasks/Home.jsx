@@ -4,9 +4,22 @@ import DailyTasks from './DailyTasks';
 import WeeklyTasks from './WeeklyTasks';
 import { useState } from 'react';
 import '../../css/tabs.css';
+import SearchTasks from "./SearchTasks";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Home() {
     const [activeTab, setActiveTab] = useState('daily');
+    const navigate = useNavigate();
+
+    //authentication check
+    useEffect(() => {
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+        navigate("/"); //Redirect to login if no token is found
+        }
+    }, [navigate]);
+
     const tasks = [
         {
             id: 1,
@@ -74,7 +87,7 @@ export default function Home() {
 
   return (
     <div className='py-4'>
-        <h1>Task List</h1>
+        <h1>My Tasks</h1>
         <div className='tabs-container'> 
             <div className="mode-switch" role="tablist">
                 <button 
@@ -99,6 +112,17 @@ export default function Home() {
                 >
                     Weekly Tasks
                 </button>
+                <button 
+                    type='button'
+                    id="tab-search"
+                    className={`mode-btn ${activeTab === 'search' ? 'active' : ''}`} 
+                    onClick={() => setActiveTab('search')}
+                    aria-selected={activeTab === 'search'}
+                    aria-controls="search-panel"
+                    role="tab"
+                >
+                    Search Tasks
+                </button>
             </div>
         </div>
         
@@ -117,7 +141,15 @@ export default function Home() {
             hidden={activeTab !== 'weekly'}
         >
             <WeeklyTasks sortedTasks={sortedTasks} />
-        </div>          
+        </div>  
+        <div
+            id="search-panel"
+            role="tabpanel"
+            aria-labelledby='tab-search'
+            hidden={activeTab !== 'search'}
+        >
+            <SearchTasks />
+        </div>        
     </div>
   )
 }

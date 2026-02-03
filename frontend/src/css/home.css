@@ -153,4 +153,28 @@ h1 {
   .task-item {
     padding: 1.1rem 1.3rem;
   }
+  .tabs-container {
+    justify-content: center;
+  }
+
+  .mode-switch {
+    flex-direction: column;         
+    width: 100%;
+    max-width: 320px;
+    padding: 0.5rem;
+    border-radius: 16px;
+  }
+
+  .mode-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    margin: 0.35rem 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .mode-btn.active {
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.35);
+  }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignInForm from "./components/SignIn";
 import LogIn from "./components/Login";
