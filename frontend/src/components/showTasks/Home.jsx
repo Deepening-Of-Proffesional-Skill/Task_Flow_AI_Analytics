@@ -98,7 +98,7 @@ export default function Home() {
     ];
 
     // Sort tasks by due date
-    const sortedTasks = [...tasks].sort(
+    const sortedTasks = [...(allTasks.length ? allTasks : tasks)].sort(
         (a, b) => new Date(a.deadline) - new Date(b.deadline)
     );
 
@@ -107,6 +107,12 @@ export default function Home() {
   return (
     <div className='py-4'>
         <h1>My Tasks</h1>
+
+        {errorTask && (
+            <div className="alert alert-danger mb-3">
+                {errorTask}
+            </div>
+        )}
         <div className='tabs-container'> 
             <div className="mode-switch" role="tablist">
                 <button 
