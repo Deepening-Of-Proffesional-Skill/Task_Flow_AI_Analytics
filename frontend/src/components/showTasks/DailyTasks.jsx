@@ -4,7 +4,9 @@ import { Card, Container  } from 'react-bootstrap';
 
 export default function DailyTasks({ sortedTasks }) {
     const groupedByDate = sortedTasks.reduce((groups, task) => {
-        const date = task.dueDate;
+        const date = task.deadline
+            ? new Date(task.deadline).toISOString().split('T')[0] 
+            : 'No Due Date';
 
         if (!groups[date]) {
             groups[date] = [];

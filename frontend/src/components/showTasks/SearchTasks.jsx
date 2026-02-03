@@ -9,9 +9,10 @@ export default function SearchTasks() {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [selectedStatus, setSelectedStatus] = useState("All");
     const [selectedPriority, setSelectedPriority] = useState("All");
+   // const [error, setError] = useState(null);
 
     const categories = ['All','Work', 'Study', 'Personal', 'Shopping', 'Others'];
-    const statuses = ['All', 'Not Started', 'In Progress', 'Completed'];
+    const statuses = ['All', 'Pending', 'In Progress', 'Completed'];
     const priorities = ['All', 'Low', 'Medium', 'High'];
 
     const isDisabled =
@@ -20,6 +21,26 @@ export default function SearchTasks() {
         selectedCategory === "All" &&
         selectedStatus === "All" &&
         selectedPriority === "All";
+
+    const handleSearch = async () => {
+        try {
+            const filters = {
+                title: searchTask,
+                deadline: selectedDueDate,
+                category: selectedCategory === "All" ? null : 
+                    selectedCategory === "Pending" ? "pending" :
+                    selectedCategory === "In Progress" ? "in_progress" :"completed",
+                priority: selectedPriority === "All" ? null : 
+                    selectedPriority === "Low" ? 1 : 
+                    selectedPriority === "Medium" ? 2 : 3,
+            };
+            //await searchTasksService(filters);
+            console.log("Filters applied:", filters); // use filters to remove lint warning
+        } catch (error) {
+            //setError('Error searching tasks. Please try again.');
+            console.error('Error searching tasks:', error);
+        }
+    };
 
   return (
     <Container className="tasks-wrapper py-4">
@@ -115,6 +136,7 @@ export default function SearchTasks() {
                     <Button
                         className='btn-search-filter'
                         disabled ={isDisabled}
+                        onClick={handleSearch}
                     >
                         <i className="bi bi-search me-2"></i>
                         Search
