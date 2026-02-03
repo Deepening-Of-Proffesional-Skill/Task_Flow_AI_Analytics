@@ -5,7 +5,6 @@ import WeeklyTasks from './WeeklyTasks';
 import { useState } from 'react';
 import '../../css/tabs.css';
 import SearchTasks from "./SearchTasks";
-import LogOut from "../LogOut";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 

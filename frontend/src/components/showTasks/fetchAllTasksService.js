@@ -1,6 +1,5 @@
-import { supabase } from '../../utils/supabaseClient';
 
-export const fetchTasks = async (userId) => {
+export const fetchTasks = async () => {
     try {
         const response =await fetch(`${import.meta.env.REACT_API_URL}/tasks`);
         const data = await response.json();
