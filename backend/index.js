@@ -22,7 +22,7 @@ app.use(express.json());
 //register the user router
 app.use('/user', userRouter);
 //register the fetchTasks router
-app.use('/tasks', fetchTasksRouter);
+app.use('/fetchAllTasks', fetchTasksRouter);
 //use the auth routes
 app.use("/auth", authRoutes);
 

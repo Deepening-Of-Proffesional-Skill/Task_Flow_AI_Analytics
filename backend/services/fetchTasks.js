@@ -2,7 +2,7 @@ import supabase from "../utils/supabaseClient.js";
 
 async function fetchTasks(userId) {
     const { data, error } = await supabase
-        .from('Tasks')
+        .from('tasks')
         .select('*')
         .eq('user_id', userId);
 
