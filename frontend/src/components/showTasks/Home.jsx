@@ -7,10 +7,13 @@ import '../../css/tabs.css';
 import SearchTasks from "./SearchTasks";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { fetchTasks } from "./fetchAllTasksService";
 
 export default function Home() {
     const [activeTab, setActiveTab] = useState('daily');
     const navigate = useNavigate();
+    const [allTasks, setAllTasks] = useState([]);
+    const [errorTask, setErrorTask] = useState(null);
 
     //authentication check
     useEffect(() => {
@@ -20,6 +23,20 @@ export default function Home() {
         }
     }, [navigate]);
 
+    //fetch tasks from backend
+    useEffect(() => {
+        const getTasks = async () => {
+            try {
+                const tasks = await fetchTasks();
+                setAllTasks(tasks);
+            } catch (error) {
+                setErrorTask('Failed to fetch tasks. Please try again later.');
+            }
+        };
+
+        getTasks();
+    }, []);
+    
     const tasks = [
         {
             id: 1,
@@ -78,7 +95,8 @@ export default function Home() {
             dueDate: "2026-03-01"
         }
     ];
-    
+
+    // Sort tasks by due date
     const sortedTasks = [...tasks].sort(
         (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
     );
