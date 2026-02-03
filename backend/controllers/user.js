@@ -100,7 +100,7 @@ export const logOutUser = async (req, res) => {
     //verify the token
     try {
       jwt.verify(token, SECRET);
-    } catch (err) {
+    } catch {
       return res.status(401).json({ error: "Invalid or expired token" });
     }
 
