@@ -2,7 +2,7 @@ import fetchTasks from "../services/fetchTasks.js";
 
 async function getTasks(req, res) {
     try {
-        const {userId} = req.body;
+        const userId = req.user.id; 
 
         if (!userId) {
             return res.status(400).json({ error: 'User ID is required' });
