@@ -12,7 +12,7 @@ import { useEffect } from "react";
 export default function Home() {
     const [activeTab, setActiveTab] = useState('daily');
     const navigate = useNavigate();
-    /*
+
     //authentication check
     useEffect(() => {
         const token = localStorage.getItem("authToken");
@@ -20,7 +20,7 @@ export default function Home() {
         navigate("/"); //Redirect to login if no token is found
         }
     }, [navigate]);
-*/
+
     const tasks = [
         {
             id: 1,
