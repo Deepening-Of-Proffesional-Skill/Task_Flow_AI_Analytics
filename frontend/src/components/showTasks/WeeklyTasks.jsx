@@ -5,7 +5,7 @@ import { getWeekYear } from "../../utils/weekUtils";
 
 export default function WeeklyTasks({ sortedTasks }) {
     const groupedByWeek = sortedTasks.reduce((groups, task) => {
-    const { year, week, label } = getWeekYear(task.dueDate);
+    const { year, week, label } = getWeekYear(task.deadline);
     const key = `${year}-W${week}`;
 
     if (!groups[key]) {
