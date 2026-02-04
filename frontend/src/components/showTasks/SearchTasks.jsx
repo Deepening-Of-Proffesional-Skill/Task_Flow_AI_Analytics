@@ -3,6 +3,7 @@ import { Col, Container, Dropdown, DropdownItem, Form, InputGroup, Row, Card, Bu
 import { useState } from 'react';
 import '../../css/SearchTasks.css';
 import { searchTasksService } from './searchedTasksService';
+import TaskCard from './TaskCard';
 
 export default function SearchTasks() {
     const [searchTask, setSearchTask] = useState('');
@@ -157,7 +158,22 @@ export default function SearchTasks() {
                 </Row>
             </Card.Body>
         </Card>
-        Search Tasks
+        <div className="search-results-section mt-5">
+            <h3 className="mb-4 text-center text-light fw-bold">Search Results</h3>
+            
+            {searchResults.length === 0 ? (
+                <Card className="search-results-empty-card">
+                    <Card.Body className="text-center py-5">
+                        <i className="bi bi-search display-4 text-muted mb-3 d-block"></i>
+                        <p className="text-muted mb-2">No tasks found matching the search criteria.</p>
+                    </Card.Body>
+                </Card>
+            ) : (
+                searchResults.map((task) => (
+                    <TaskCard key={task.id} task={task} />
+                ))
+            )}
+        </div>
     </Container>
   )
 }
