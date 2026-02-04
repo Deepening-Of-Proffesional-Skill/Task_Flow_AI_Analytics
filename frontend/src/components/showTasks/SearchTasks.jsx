@@ -45,6 +45,12 @@ export default function SearchTasks() {
         } catch (error) {
             //setError('Error searching tasks. Please try again.');
             console.error('Error searching tasks:', error);
+        } finally {
+            setSearchTask('');
+            setSelectedDueDate("");
+            setSelectedCategory("All");
+            setSelectedStatus("All");
+            setSelectedPriority("All");
         }
     };
 
