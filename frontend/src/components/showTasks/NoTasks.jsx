@@ -8,7 +8,7 @@ export default function NoTasks() {
         <Card.Body className="text-center py-5">
             <i className="bi bi-journal-x display-4 text-muted mb-4"></i>
             
-            <h4 className="mb-3 text-light">You haven't created any tasks yet</h4>
+            <h4 className="mb-3 text-light">You haven&apos;t created any tasks yet</h4>
             
             <p className="text-muted mb-4">
                 Start organizing your day by adding your first task!

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card } from 'react-bootstrap';
 import '../../css/TaskCard.css';
+import PropTypes from 'prop-types';
 
 export default function TaskCard({ task }) {
     const getPriorityLabel = (priority) => {
@@ -42,3 +43,12 @@ export default function TaskCard({ task }) {
   )
 }
 
+TaskCard.propTypes = {
+    task: PropTypes.shape({
+        title: PropTypes.string,
+        status: PropTypes.string,
+        priority: PropTypes.number,
+        deadline: PropTypes.string,
+        description: PropTypes.string,
+    }).isRequired,
+};
