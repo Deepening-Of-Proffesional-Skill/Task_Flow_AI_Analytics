@@ -36,6 +36,12 @@ export const validateTaskInput = (data) => {
     errors.status = 'Status must be pending, in_progress, or completed';
   }
 
+  // Validate category (optional)
+  const validCategories = ['work', 'personal', 'shopping', 'study', 'others'];
+  if (data.category && !validCategories.includes(data.category)) {
+    errors.category = 'Category must be one of: work, personal, shopping, study, others';
+  }
+
   return {
     isValid: Object.keys(errors).length === 0,
     errors
