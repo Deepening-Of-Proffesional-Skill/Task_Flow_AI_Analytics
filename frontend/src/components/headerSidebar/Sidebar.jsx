@@ -24,13 +24,13 @@ export default function Sidebar({ show, onHide }) {
   ];
 
   useEffect(() => {
-  if (show) {
-    document.body.classList.add('offcanvas-open');
-  } else {
-    document.body.classList.remove('offcanvas-open');
-  }
-  return () => document.body.classList.remove('offcanvas-open');
-}, [show]);
+    if (show) {
+      document.body.classList.add('offcanvas-open');
+    } else {
+      document.body.classList.remove('offcanvas-open');
+    }
+    return () => document.body.classList.remove('offcanvas-open');
+  }, [show]);
 
   return (
     <>

@@ -8,9 +8,9 @@ import TaskCard from './TaskCard';
 export default function SearchTasks() {
     const [searchTask, setSearchTask] = useState('');
     const [selectedDueDate, setSelectedDueDate] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("All");
-    const [selectedStatus, setSelectedStatus] = useState("All");
-    const [selectedPriority, setSelectedPriority] = useState("All");
+    const [selectedCategory, setSelectedCategory] = useState("Select");
+    const [selectedStatus, setSelectedStatus] = useState("Select");
+    const [selectedPriority, setSelectedPriority] = useState("Select");
    // const [error, setError] = useState(null);
    const [searchResults, setSearchResults] = useState([]);  
 
@@ -21,22 +21,25 @@ export default function SearchTasks() {
     const isDisabled =
         !searchTask &&
         !selectedDueDate &&
-        selectedCategory === "All" &&
-        selectedStatus === "All" &&
-        selectedPriority === "All";
+        selectedCategory === "Select" &&
+        selectedStatus === "Select" &&
+        selectedPriority === "Select";
 
     const handleSearch = async () => {
         try {
             const filters = {
                 title: searchTask,
                 deadline: selectedDueDate,
-                status: selectedStatus === "All" ? null : 
+                status: selectedStatus === "Select" ? null : 
                     selectedStatus === "Pending" ? "pending" :
-                    selectedStatus === "In Progress" ? "in_progress" :"completed",
-                priority: selectedPriority === "All" ? null : 
+                    selectedStatus === "In Progress" ? "in_progress" :
+                    selectedStatus === "Completed" ? "completed" : "All",
+                priority: selectedPriority === "Select" ? null : 
                     selectedPriority === "Low" ? 1 : 
-                    selectedPriority === "Medium" ? 2 : 3,
-                category: selectedCategory === "All" ? null : selectedCategory.toLowerCase()
+                    selectedPriority === "Medium" ? 2 : 
+                    selectedPriority === "High" ? 3 : "All",
+                category: selectedCategory === "Select" ? null : 
+                    selectedCategory === "All" ? "All" : selectedCategory.toLowerCase()
             };
             const tasks = await searchTasksService(filters);
             setSearchResults(tasks);
@@ -49,9 +52,9 @@ export default function SearchTasks() {
         } finally {
             setSearchTask('');
             setSelectedDueDate("");
-            setSelectedCategory("All");
-            setSelectedStatus("All");
-            setSelectedPriority("All");
+            setSelectedCategory("Select");
+            setSelectedStatus("Select");
+            setSelectedPriority("Select");
         }
     };
 
