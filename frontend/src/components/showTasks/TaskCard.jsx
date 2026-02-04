@@ -18,7 +18,7 @@ export default function TaskCard({ task }) {
     }
 
   return (
-    <Card className="task-card mb-4">
+    <Card className="task-card mb-4 m-3" >
         <Card.Body className="task-card-body">
             <Card.Title className="task-card-title">{task.title}</Card.Title>
             <Card.Subtitle className="task-card-subtitle mb-3">

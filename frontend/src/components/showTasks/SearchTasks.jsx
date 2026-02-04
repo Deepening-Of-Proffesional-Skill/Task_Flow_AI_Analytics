@@ -162,7 +162,7 @@ export default function SearchTasks() {
             </Card.Body>
         </Card>
         <div className="search-results-section mt-5">
-            <h3 className="mb-4 text-center text-light fw-bold">Search Results</h3>
+            <h3 className="mb-4 p-3  text-light fw-bold">Search Results</h3>
             
             {searchResults.length === 0 ? (
                 <Card className="search-results-empty-card">
