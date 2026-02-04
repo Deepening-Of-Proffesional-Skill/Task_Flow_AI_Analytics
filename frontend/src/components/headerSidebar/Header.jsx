@@ -27,7 +27,7 @@ export default function Header({ toggleSidebar }) {
           className="fw-bold fs-4 me-auto"
           style={{ cursor: 'pointer' }}
         >
-          TaskFlow AI
+          TaskFlow AI Analytics
         </Navbar.Brand>
         
         <Nav className="ms-auto align-items-center d-flex gap-3 gap-md-4">
