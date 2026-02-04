@@ -27,17 +27,8 @@ export const validateTaskInput = (data) => {
     const isValidDate = !isNaN(Date.parse(data.deadline));
     if (!isValidDate) {
       errors.deadline = 'Invalid date format';
-    } else {
-      // Compare dates at day level (start of day)
-      const deadlineDate = new Date(data.deadline);
-      const today = new Date();
-      deadlineDate.setHours(0, 0, 0, 0);
-      today.setHours(0, 0, 0, 0);
-      
-      if (deadlineDate < today) {
-        errors.deadline = 'Deadline cannot be in the past';
-      }
     }
+    // Note: Allow past deadlines for completed tasks
   }
 
   // Validate status (optional, defaults to 'pending')
