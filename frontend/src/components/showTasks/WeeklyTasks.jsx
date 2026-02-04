@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Card, Container } from "react-bootstrap";
 import { getWeekYear } from "../../utils/weekUtils";
+import NoTasks from "./NoTasks";
 
 export default function WeeklyTasks({ sortedTasks }) {
     const groupedByWeek = sortedTasks.reduce((groups, task) => {
@@ -18,29 +19,33 @@ export default function WeeklyTasks({ sortedTasks }) {
 
   return (
     <Container className="tasks-wrapper">
-        {Object.entries(groupedByWeek).map(([key, group]) => (
-            <Card key={key} className="mb-4">
-                <Card.Body>
-                    <div className="due-date">
-                        {group.label}
-                    </div>
+        {sortedTasks.length > 0 ? (        
+            Object.entries(groupedByWeek).map(([key, group]) => (
+                <Card key={key} className="mb-4">
+                    <Card.Body>
+                        <div className="due-date">
+                            {group.label}
+                        </div>
 
-                    <div className='d-flex flex-column gap-2'>
-                        {group.tasks.map((task) => (
-                            <div key={task.id} className="task-item  border rounded">
-                                <Card.Title className="mb-1">
-                                    {task.title}
-                                </Card.Title>
+                        <div className='d-flex flex-column gap-2'>
+                            {group.tasks.map((task) => (
+                                <div key={task.id} className="task-item  border rounded">
+                                    <Card.Title className="mb-1">
+                                        {task.title}
+                                    </Card.Title>
 
-                                <Card.Subtitle className="d-flex align-items-center gap-2">
-                                    <span >{task.status}</span>
-                                </Card.Subtitle>
-                            </div>
-                        ))}
-                    </div>
-                </Card.Body>
-            </Card>
-        ))}                     
+                                    <Card.Subtitle className="d-flex align-items-center gap-2">
+                                        <span >{task.status}</span>
+                                    </Card.Subtitle>
+                                </div>
+                            ))}
+                        </div>
+                    </Card.Body>
+                </Card>
+            )) 
+        ) : (
+            <NoTasks />
+        )}                    
     </Container>
   )
 }

@@ -2,14 +2,17 @@ import React from 'react'
 import { Col, Container, Dropdown, DropdownItem, Form, InputGroup, Row, Card, Button} from 'react-bootstrap'
 import { useState } from 'react';
 import '../../css/SearchTasks.css';
+import { searchTasksService } from './searchedTasksService';
+import TaskCard from './TaskCard';
 
 export default function SearchTasks() {
     const [searchTask, setSearchTask] = useState('');
     const [selectedDueDate, setSelectedDueDate] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("All");
-    const [selectedStatus, setSelectedStatus] = useState("All");
-    const [selectedPriority, setSelectedPriority] = useState("All");
-   // const [error, setError] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState("Select");
+    const [selectedStatus, setSelectedStatus] = useState("Select");
+    const [selectedPriority, setSelectedPriority] = useState("Select");
+    const [error, setError] = useState(null);
+    const [searchResults, setSearchResults] = useState([]);  
 
     const categories = ['All','Work', 'Study', 'Personal', 'Shopping', 'Others'];
     const statuses = ['All', 'Pending', 'In Progress', 'Completed'];
@@ -18,27 +21,40 @@ export default function SearchTasks() {
     const isDisabled =
         !searchTask &&
         !selectedDueDate &&
-        selectedCategory === "All" &&
-        selectedStatus === "All" &&
-        selectedPriority === "All";
+        selectedCategory === "Select" &&
+        selectedStatus === "Select" &&
+        selectedPriority === "Select";
 
     const handleSearch = async () => {
+        setError(null);
         try {
             const filters = {
                 title: searchTask,
                 deadline: selectedDueDate,
-                category: selectedCategory === "All" ? null : 
-                    selectedCategory === "Pending" ? "pending" :
-                    selectedCategory === "In Progress" ? "in_progress" :"completed",
-                priority: selectedPriority === "All" ? null : 
+                status: selectedStatus === "Select" ? null : 
+                    selectedStatus === "Pending" ? "pending" :
+                    selectedStatus === "In Progress" ? "in_progress" :
+                    selectedStatus === "Completed" ? "completed" : "All",
+                priority: selectedPriority === "Select" ? null : 
                     selectedPriority === "Low" ? 1 : 
-                    selectedPriority === "Medium" ? 2 : 3,
+                    selectedPriority === "Medium" ? 2 : 
+                    selectedPriority === "High" ? 3 : "All",
+                category: selectedCategory === "Select" ? null : 
+                    selectedCategory === "All" ? "All" : selectedCategory.toLowerCase()
             };
-            //await searchTasksService(filters);
-            console.log("Filters applied:", filters); // use filters to remove lint warning
+            const tasks = await searchTasksService(filters);
+            setSearchResults(tasks);
+            console.log("Search Results:", tasks);
+
         } catch (error) {
-            //setError('Error searching tasks. Please try again.');
+            setError('Error searching tasks. Please try again.');
             console.error('Error searching tasks:', error);
+        } finally {
+            setSearchTask('');
+            setSelectedDueDate("");
+            setSelectedCategory("Select");
+            setSelectedStatus("Select");
+            setSelectedPriority("Select");
         }
     };
 
@@ -145,7 +161,33 @@ export default function SearchTasks() {
                 </Row>
             </Card.Body>
         </Card>
-        Search Tasks
+        
+        {/*show eeror if any. otherwise search result div*/}
+        {error ? (
+            <div className="search-results-section mt-5">
+                <div className="alert alert-danger mt-4">
+                    {error}
+                </div>
+            </div>
+        ) : (
+
+            <div className="search-results-section mt-5">
+                <h3 className="mb-4 p-3  text-light fw-bold">Search Results</h3>
+                
+                {searchResults.length === 0 ? (
+                    <Card className="search-results-empty-card">
+                        <Card.Body className="text-center py-5">
+                            <i className="bi bi-search display-4 text-muted mb-3 d-block"></i>
+                            <p className="text-muted mb-2">No tasks found matching the search criteria.</p>
+                        </Card.Body>
+                    </Card>
+                ) : (
+                    searchResults.map((task) => (
+                        <TaskCard key={task.id} task={task} />
+                    ))
+                )}
+            </div>
+        )}
     </Container>
   )
 }
