@@ -12,3 +12,11 @@ export const STATUS_TYPES = {
   COMPLETED: 'completed'
 };
 
+export const CATEGORY_TYPES = [
+  { value: 'work', label: 'Work', color: 'bg-blue-100 text-blue-800' },
+  { value: 'personal', label: 'Personal', color: 'bg-purple-100 text-purple-800' },
+  { value: 'shopping', label: 'Shopping', color: 'bg-green-100 text-green-800' },
+  { value: 'study', label: 'Study', color: 'bg-orange-100 text-orange-800' },
+  { value: 'others', label: 'Others', color: 'bg-gray-100 text-gray-800' }
+];
+
