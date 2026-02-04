@@ -8,6 +8,7 @@ const TaskItem = ({ task }) => {
   const [editData, setEditData] = useState({
     title: task.title,
     description: task.description || '',
+    category: task.category || 'work',
     priority: task.priority,
     deadline: task.deadline ? new Date(task.deadline).toISOString().split('T')[0] : ''
   });
@@ -74,6 +75,28 @@ const TaskItem = ({ task }) => {
     return labels[priority];
   };
 
+  const getCategoryColor = (category) => {
+    const categories = {
+      work: 'bg-blue-100 text-blue-800',
+      personal: 'bg-purple-100 text-purple-800',
+      shopping: 'bg-green-100 text-green-800',
+      study: 'bg-orange-100 text-orange-800',
+      others: 'bg-gray-100 text-gray-800'
+    };
+    return categories[category] || 'bg-gray-100 text-gray-800';
+  };
+
+  const getCategoryLabel = (category) => {
+    const labels = {
+      work: 'Work',
+      personal: 'Personal',
+      shopping: 'Shopping',
+      study: 'Study',
+      others: 'Others'
+    };
+    return labels[category] || category;
+  };
+
   if (isEditing) {
     return (
       <div className="border rounded-lg p-4 bg-white shadow-sm">
@@ -91,6 +114,18 @@ const TaskItem = ({ task }) => {
             className="w-full px-3 py-2 border rounded-md"
             placeholder="Description (optional)"
           />
+
+          <select
+            value={editData.category}
+            onChange={(e) => setEditData({...editData, category: e.target.value})}
+            className="w-full px-3 py-2 border rounded-md"
+          >
+            <option value="work">Work</option>
+            <option value="personal">Personal</option>
+            <option value="shopping">Shopping</option>
+            <option value="study">Study</option>
+            <option value="others">Others</option>
+          </select>
           
           <div className="flex items-center space-x-4">
             <select
@@ -159,8 +194,12 @@ const TaskItem = ({ task }) => {
             </select>
           </div>
           
-          <div className="flex items-center space-x-4 mt-2">
-            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+          {/* Category and Priority Display */}
+          <div className="flex items-center space-x-3 mt-3 mb-2 flex-wrap gap-2">
+            <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(task.category)}`}>
+              {getCategoryLabel(task.category)}
+            </span>
+            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
               task.priority === 1 ? 'text-blue-600 bg-blue-100' :
               task.priority === 2 ? 'text-yellow-600 bg-yellow-100' :
               'text-red-600 bg-red-100'
