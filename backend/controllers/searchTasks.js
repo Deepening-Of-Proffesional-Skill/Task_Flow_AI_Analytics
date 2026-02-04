@@ -2,7 +2,8 @@ import searchTasks from "../services/searchTasks.js";
 
 async function searchFilteredTasks(req, res) {
     try {
-        const {userId, title, deadline, category, priority, status} = req.body; 
+        const userId = req.user.id;
+        const {title, deadline, category, priority, status} = req.body; 
 
         if (!userId) {
             return res.status(400).json({ error: 'User ID is required' });
