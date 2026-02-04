@@ -29,7 +29,7 @@ const TaskList = ({ tasks, loading, error }) => {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="grid grid-cols-3 gap-4">
       {tasks.map((task) => (
         <TaskItem key={task.id} task={task} />
       ))}
