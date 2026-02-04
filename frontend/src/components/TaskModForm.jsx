@@ -8,6 +8,7 @@ const TaskForm = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
+    category: 'work',
     priority: 1,
     deadline: '',
     status: 'pending'
@@ -61,6 +62,7 @@ const TaskForm = () => {
         setFormData({
           title: '',
           description: '',
+          category: 'work',
           priority: 1,
           deadline: '',
           status: 'pending'
@@ -111,6 +113,23 @@ const TaskForm = () => {
             rows="3"
             placeholder="Enter task description (optional)"
           />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Category
+          </label>
+          <select
+            value={formData.category}
+            onChange={(e) => handleChange('category', e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+          >
+            <option value="work">Work</option>
+            <option value="personal">Personal</option>
+            <option value="shopping">Shopping</option>
+            <option value="study">Study</option>
+            <option value="others">Others</option>
+          </select>
         </div>
 
         <PrioritySelector
