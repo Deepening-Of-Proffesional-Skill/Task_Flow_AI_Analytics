@@ -11,8 +11,8 @@ export default function SearchTasks() {
     const [selectedCategory, setSelectedCategory] = useState("Select");
     const [selectedStatus, setSelectedStatus] = useState("Select");
     const [selectedPriority, setSelectedPriority] = useState("Select");
-   // const [error, setError] = useState(null);
-   const [searchResults, setSearchResults] = useState([]);  
+    const [error, setError] = useState(null);
+    const [searchResults, setSearchResults] = useState([]);  
 
     const categories = ['All','Work', 'Study', 'Personal', 'Shopping', 'Others'];
     const statuses = ['All', 'Pending', 'In Progress', 'Completed'];
@@ -26,6 +26,7 @@ export default function SearchTasks() {
         selectedPriority === "Select";
 
     const handleSearch = async () => {
+        setError(null);
         try {
             const filters = {
                 title: searchTask,
@@ -45,9 +46,8 @@ export default function SearchTasks() {
             setSearchResults(tasks);
             console.log("Search Results:", tasks);
 
-            //console.log("Filters applied:", filters); // use filters to remove lint warning
         } catch (error) {
-            //setError('Error searching tasks. Please try again.');
+            setError('Error searching tasks. Please try again.');
             console.error('Error searching tasks:', error);
         } finally {
             setSearchTask('');
@@ -161,22 +161,33 @@ export default function SearchTasks() {
                 </Row>
             </Card.Body>
         </Card>
-        <div className="search-results-section mt-5">
-            <h3 className="mb-4 p-3  text-light fw-bold">Search Results</h3>
-            
-            {searchResults.length === 0 ? (
-                <Card className="search-results-empty-card">
-                    <Card.Body className="text-center py-5">
-                        <i className="bi bi-search display-4 text-muted mb-3 d-block"></i>
-                        <p className="text-muted mb-2">No tasks found matching the search criteria.</p>
-                    </Card.Body>
-                </Card>
-            ) : (
-                searchResults.map((task) => (
-                    <TaskCard key={task.id} task={task} />
-                ))
-            )}
-        </div>
+        
+        {/*show eeror if any. otherwise search result div*/}
+        {error ? (
+            <div className="search-results-section mt-5">
+                <div className="alert alert-danger mt-4">
+                    {error}
+                </div>
+            </div>
+        ) : (
+
+            <div className="search-results-section mt-5">
+                <h3 className="mb-4 p-3  text-light fw-bold">Search Results</h3>
+                
+                {searchResults.length === 0 ? (
+                    <Card className="search-results-empty-card">
+                        <Card.Body className="text-center py-5">
+                            <i className="bi bi-search display-4 text-muted mb-3 d-block"></i>
+                            <p className="text-muted mb-2">No tasks found matching the search criteria.</p>
+                        </Card.Body>
+                    </Card>
+                ) : (
+                    searchResults.map((task) => (
+                        <TaskCard key={task.id} task={task} />
+                    ))
+                )}
+            </div>
+        )}
     </Container>
   )
 }
