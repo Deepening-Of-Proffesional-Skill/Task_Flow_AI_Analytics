@@ -1,0 +1,61 @@
+.no-tasks-card {
+  background: linear-gradient(145deg, #141418, #0f1218);
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.7),          
+    0 10px 30px rgba(0, 0, 0, 0.5),          
+    inset 0 1px 0 rgba(255, 255, 255, 0.03); 
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-top: 5rem !important;
+}
+
+.no-tasks-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 
+    0 40px 100px rgba(0, 0, 0, 0.8),
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.no-tasks-create-btn {
+  background: linear-gradient(135deg, #00d4ff, #0099cc);
+  border: none;
+  color: #0d1117;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 212, 255, 0.35);
+}
+
+.no-tasks-create-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 212, 255, 0.5);
+  background: linear-gradient(135deg, #00eaff, #00b3ff);
+  color: #000;
+}
+
+.no-tasks-card .bi-journal-x {
+  color: #00d4ff !important;
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+.no-tasks-create-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+
+@media (max-width: 576px) {
+  .no-tasks-card {
+    border-radius: 16px;
+    margin: 2rem 1rem;
+  }
+  
+  .no-tasks-create-btn {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+  }
+}
