@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Container, Dropdown, DropdownItem, Form, InputGroup, Row, Card, Button} from 'react-bootstrap'
 import { useState } from 'react';
 import '../../css/SearchTasks.css';
+import { searchTasksService } from './searchedTasksService';
 
 export default function SearchTasks() {
     const [searchTask, setSearchTask] = useState('');
@@ -10,6 +11,7 @@ export default function SearchTasks() {
     const [selectedStatus, setSelectedStatus] = useState("All");
     const [selectedPriority, setSelectedPriority] = useState("All");
    // const [error, setError] = useState(null);
+   const [searchResults, setSearchResults] = useState([]);  
 
     const categories = ['All','Work', 'Study', 'Personal', 'Shopping', 'Others'];
     const statuses = ['All', 'Pending', 'In Progress', 'Completed'];
@@ -27,15 +29,19 @@ export default function SearchTasks() {
             const filters = {
                 title: searchTask,
                 deadline: selectedDueDate,
-                category: selectedCategory === "All" ? null : 
-                    selectedCategory === "Pending" ? "pending" :
-                    selectedCategory === "In Progress" ? "in_progress" :"completed",
+                status: selectedStatus === "All" ? null : 
+                    selectedStatus === "Pending" ? "pending" :
+                    selectedStatus === "In Progress" ? "in_progress" :"completed",
                 priority: selectedPriority === "All" ? null : 
                     selectedPriority === "Low" ? 1 : 
                     selectedPriority === "Medium" ? 2 : 3,
+                category: selectedCategory === "All" ? null : selectedCategory.toLowerCase()
             };
-            //await searchTasksService(filters);
-            console.log("Filters applied:", filters); // use filters to remove lint warning
+            const tasks = await searchTasksService(filters);
+            setSearchResults(tasks);
+            console.log("Search Results:", tasks);
+
+            //console.log("Filters applied:", filters); // use filters to remove lint warning
         } catch (error) {
             //setError('Error searching tasks. Please try again.');
             console.error('Error searching tasks:', error);
