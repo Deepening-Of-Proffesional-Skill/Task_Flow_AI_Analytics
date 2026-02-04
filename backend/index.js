@@ -7,6 +7,8 @@ import userRouter from './routes/user.js';
 //import the fetchTasks router
 import fetchTasksRouter from './routes/fetchTasks.js';
 import authRoutes from "./middleware/auth.js";
+//import the searchTasks router
+import searchTasksRouter from './routes/searchTasks.js';
 
 //configure environment variables
 dotenv.config();
@@ -25,6 +27,8 @@ app.use('/user', userRouter);
 app.use('/fetchAllTasks', fetchTasksRouter);
 //use the auth routes
 app.use("/auth", authRoutes);
+//register the searchTasks router
+app.use('/searchTasks', searchTasksRouter);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the backend server!');
