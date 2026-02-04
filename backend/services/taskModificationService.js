@@ -73,6 +73,7 @@ class TaskService {
         priority: taskData.priority,
         deadline: taskData.deadline ? new Date(taskData.deadline).toISOString() : null,
         status: taskData.status || 'pending',
+        category: taskData.category || 'others',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
       };
@@ -113,6 +114,7 @@ class TaskService {
         priority: taskData.priority,
         deadline: taskData.deadline ? new Date(taskData.deadline).toISOString() : null,
         status: taskData.status || 'pending',
+        category: taskData.category || 'others',
         updated_at: new Date().toISOString()
       };
 
