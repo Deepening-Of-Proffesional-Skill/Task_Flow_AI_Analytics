@@ -1,5 +1,6 @@
 // frontend/src/components/TaskItem.jsx
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useTaskOperations } from '../hooks/useTaskOperationsMod';
 import { useTaskContext } from '../context/TaskContext';
 
@@ -237,6 +238,18 @@ const TaskItem = ({ task }) => {
       </div>
     </div>
   );
+};
+
+TaskItem.propTypes = {
+  task: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    category: PropTypes.string,
+    priority: PropTypes.number.isRequired,
+    deadline: PropTypes.string,
+    status: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default TaskItem;

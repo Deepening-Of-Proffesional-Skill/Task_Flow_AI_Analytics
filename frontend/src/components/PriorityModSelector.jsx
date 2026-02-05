@@ -1,5 +1,6 @@
 // frontend/src/components/PrioritySelector.jsx
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const PrioritySelector = ({ value, onChange, disabled = false }) => {
   const priorities = [
@@ -32,6 +33,12 @@ const PrioritySelector = ({ value, onChange, disabled = false }) => {
       </div>
     </div>
   );
+};
+
+PrioritySelector.propTypes = {
+  value: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
 };
 
 export default PrioritySelector;
