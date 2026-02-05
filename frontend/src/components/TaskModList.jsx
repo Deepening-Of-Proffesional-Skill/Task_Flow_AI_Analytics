@@ -1,5 +1,6 @@
 // frontend/src/components/TaskList.jsx
 import React from 'react';
+import PropTypes from 'prop-types';
 import TaskItem from './TaskModItem';
 
 const TaskList = ({ tasks, loading, error }) => {
@@ -35,6 +36,20 @@ const TaskList = ({ tasks, loading, error }) => {
       ))}
     </div>
   );
+};
+
+TaskList.propTypes = {
+  tasks: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    category: PropTypes.string,
+    priority: PropTypes.number.isRequired,
+    deadline: PropTypes.string,
+    status: PropTypes.string.isRequired
+  })),
+  loading: PropTypes.bool,
+  error: PropTypes.string
 };
 
 export default TaskList;

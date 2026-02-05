@@ -1,6 +1,7 @@
 // frontend/src/context/TaskContext.jsx
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useTasks } from '../hooks/useTasksMod';
 
 export const TaskContext = createContext();
@@ -73,6 +74,10 @@ export const TaskProvider = ({ children }) => {
       {children}
     </TaskContext.Provider>
   );
+};
+
+TaskProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };
 
 export const useTaskContext = () => {
