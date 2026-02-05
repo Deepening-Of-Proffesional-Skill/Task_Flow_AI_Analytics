@@ -9,6 +9,8 @@ import fetchTasksRouter from './routes/fetchTasks.js';
 import authRoutes from "./middleware/auth.js";
 // Import task modification router
 import tasksRouter from './routes/taskModificationRoute.js';
+//import the searchTasks router
+import searchTasksRouter from './routes/searchTasks.js';
 
 //configure environment variables
 dotenv.config();
@@ -33,6 +35,8 @@ app.use('/fetchAllTasks', fetchTasksRouter);
 app.use("/auth", authRoutes);
 // Register task modification routes
 app.use('/api/tasks', tasksRouter);
+//register the searchTasks router
+app.use('/searchTasks', searchTasksRouter);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the backend server!');
