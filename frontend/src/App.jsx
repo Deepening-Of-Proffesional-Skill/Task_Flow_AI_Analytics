@@ -6,18 +6,23 @@ import SignInForm from "./components/SignIn";
 import LogIn from "./components/Login";
 import Home from "./components/showTasks/Home";
 import HomeLayout from "./layouts/HomeLayout";
+import ModifyDashboard from "./pages/ModifyDashboard";
+import { TaskProvider } from "./context/TaskContext";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LogIn/>} />
-        <Route path="/signup" element={<SignInForm />} />
-        <Route element={<HomeLayout />} >
-          <Route path="/home" element={<Home />} />
-        </Route>
-      </Routes>
-    </Router>
+    <TaskProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LogIn/>} />
+          <Route path="/signup" element={<SignInForm />} />
+          <Route element={<HomeLayout />} >
+            <Route path="/home" element={<Home />} />
+          </Route>
+          <Route path="/dashboard" element={<ModifyDashboard />} />
+        </Routes>
+      </Router>
+    </TaskProvider>
   );
 }
 
