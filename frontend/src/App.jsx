@@ -18,8 +18,9 @@ function App() {
           <Route path="/signup" element={<SignInForm />} />
           <Route element={<HomeLayout />} >
             <Route path="/home" element={<Home />} />
+            <Route path="/dashboard" element={<ModifyDashboard />} />
+            <Route path="/addTasks" element={<ModifyDashboard />} />
           </Route>
-          <Route path="/dashboard" element={<ModifyDashboard />} />
         </Routes>
       </Router>
     </TaskProvider>
