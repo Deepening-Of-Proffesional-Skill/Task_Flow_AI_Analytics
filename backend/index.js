@@ -11,6 +11,8 @@ import authRoutes from "./middleware/auth.js";
 import tasksRouter from './routes/taskModificationRoute.js';
 //import the searchTasks router
 import searchTasksRouter from './routes/searchTasks.js';
+// import progressRouter router
+import progressRouter from "./routes/progressRoute.js";
 
 //configure environment variables
 dotenv.config();
@@ -37,6 +39,8 @@ app.use("/auth", authRoutes);
 app.use('/tasks', tasksRouter);
 //register the searchTasks router
 app.use('/searchTasks', searchTasksRouter);
+// get progress reports
+app.use("/api/progress", progressRouter);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the backend server!');
