@@ -34,7 +34,7 @@ app.use('/fetchAllTasks', fetchTasksRouter);
 //use the auth routes
 app.use("/auth", authRoutes);
 // Register task modification routes
-app.use('/api/tasks', tasksRouter);
+app.use('/tasks', tasksRouter);
 //register the searchTasks router
 app.use('/searchTasks', searchTasksRouter);
 

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useTaskOperations } from '../hooks/useTaskOperationsMod';
 import { useTaskContext } from '../context/TaskContext';
 import PrioritySelector from './PriorityModSelector';
+import '../css/ModifyDashboard.css';
 
 const TaskForm = () => {
   const [formData, setFormData] = useState({
@@ -81,48 +82,48 @@ const TaskForm = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Add New Task</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+    <div className="task-form-container">
+      <h2 className="task-form-title">Add New Task</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="form-label">
             Title *
           </label>
           <input
             type="text"
             value={formData.title}
             onChange={(e) => handleChange('title', e.target.value)}
-            className={`w-full px-3 py-2 border rounded-md ${
-              errors.title ? 'border-red-500' : 'border-gray-300'
+            className={`form-input ${
+              errors.title ? 'form-input-error' : ''
             }`}
             placeholder="Enter task title"
           />
           {errors.title && (
-            <p className="text-red-500 text-sm mt-1">{errors.title}</p>
+            <p className="form-error">{errors.title}</p>
           )}
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+        <div className="form-group">
+          <label className="form-label">
             Description
           </label>
           <textarea
             value={formData.description}
             onChange={(e) => handleChange('description', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="form-textarea"
             rows="3"
             placeholder="Enter task description (optional)"
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+        <div className="form-group">
+          <label className="form-label">
             Category
           </label>
           <select
             value={formData.category}
             onChange={(e) => handleChange('category', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            className="form-select"
           >
             <option value="work">Work</option>
             <option value="personal">Personal</option>
@@ -137,27 +138,27 @@ const TaskForm = () => {
           onChange={(value) => handleChange('priority', value)}
         />
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+        <div className="form-group">
+          <label className="form-label">
             Deadline
           </label>
           <input
             type="date"
             value={formData.deadline}
             onChange={(e) => handleChange('deadline', e.target.value)}
-            className={`w-full px-3 py-2 border rounded-md ${
-              errors.deadline ? 'border-red-500' : 'border-gray-300'
+            className={`form-input ${
+              errors.deadline ? 'form-input-error' : ''
             }`}
           />
           {errors.deadline && (
-            <p className="text-red-500 text-sm mt-1">{errors.deadline}</p>
+            <p className="form-error">{errors.deadline}</p>
           )}
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="submit-btn"
         >
           {loading ? 'Creating...' : 'Create Task'}
         </button>

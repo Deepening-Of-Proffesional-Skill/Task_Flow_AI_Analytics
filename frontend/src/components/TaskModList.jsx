@@ -2,35 +2,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TaskItem from './TaskModItem';
+import '../css/ModifyDashboard.css';
 
 const TaskList = ({ tasks, loading, error }) => {
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-32">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+      <div className="no-tasks">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-500" style={{margin: '0 auto'}}></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-        <strong className="font-bold">Error: </strong>
-        <span className="block sm:inline">{error}</span>
+      <div style={{
+        background: 'rgba(255, 107, 107, 0.1)',
+        border: '1px solid #ff6b6b',
+        color: '#ff6b6b',
+        padding: '1rem',
+        borderRadius: '12px'
+      }}>
+        <strong style={{fontWeight: 'bold'}}>Error: </strong>
+        <span>{error}</span>
       </div>
     );
   }
 
   if (!tasks || tasks.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-500">
+      <div className="no-tasks">
         <p>No tasks found. Create your first task!</p>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div>
       {tasks.map((task) => (
         <TaskItem key={task.id} task={task} />
       ))}
