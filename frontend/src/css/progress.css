@@ -1,0 +1,41 @@
+.reports-page {
+  color: #e5e7eb;
+}
+
+.reports-title {
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.reports-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.progress-card {
+  background-color: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  width: 260px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.progress-card h5 {
+  margin-bottom: 8px;
+  color: #f9fafb;
+}
+
+.progress-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.progress-card:hover {
+  background-color: #1f2933;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
