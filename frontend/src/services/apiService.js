@@ -50,6 +50,17 @@ export const taskApi = {
   getTaskById: (id) => apiService.get(`/tasks/${id}`),
 
   getTaskStats: () => apiService.get('/tasks/stats')
+
+  
 };
+
+export const progressApi = {
+  getDailyProgress: () => apiService.get('/api/progress/daily'),
+
+  getWeeklyProgress: () => apiService.get('/api/progress/weekly'),
+
+  getOverallProgress: () => apiService.get('/api/progress/summary'),
+};
+
 
 export default apiService;

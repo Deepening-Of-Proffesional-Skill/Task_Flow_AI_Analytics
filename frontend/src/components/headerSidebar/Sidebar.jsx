@@ -21,6 +21,7 @@ export default function Sidebar({ show, onHide }) {
     { path: "/addTasks", icon: <FaUniversity  />, label: "Add Tasks" },
     { path: "/productivityReports", icon: <FaChartBar />, label: "Reports" },
     { path: "/profile", icon: <FaUser />, label: "Profile" },
+    
   ];
 
   useEffect(() => {
