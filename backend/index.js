@@ -1,6 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import progressRoute from "./routes/progressRoute.js";
+
 
 //import the user router
 import userRouter from './routes/user.js';
@@ -40,7 +42,8 @@ app.use('/tasks', tasksRouter);
 //register the searchTasks router
 app.use('/searchTasks', searchTasksRouter);
 // get progress reports
-app.use("/api/progress", progressRouter);
+app.use("/api/progress", progressRoute);
+
 
 app.get('/', (req, res) => {
   res.send('Welcome to the backend server!');

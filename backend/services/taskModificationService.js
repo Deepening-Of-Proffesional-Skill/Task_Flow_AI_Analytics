@@ -109,14 +109,24 @@ class TaskService {
 
     try {
       const updateData = {
-        title: taskData.title.trim(),
-        description: taskData.description ? taskData.description.trim() : null,
-        priority: taskData.priority,
-        deadline: taskData.deadline ? new Date(taskData.deadline).toISOString() : null,
-        status: taskData.status || 'pending',
-        category: taskData.category || 'others',
-        updated_at: new Date().toISOString()
-      };
+      title: taskData.title.trim(),
+      description: taskData.description ? taskData.description.trim() : null,
+      priority: taskData.priority,
+      deadline: taskData.deadline
+        ? new Date(taskData.deadline).toISOString()
+        : null,
+      status: taskData.status || 'pending',
+      category: taskData.category || 'others',
+      updated_at: new Date().toISOString(),
+    };
+
+    // 🔹 Progress tracking logic (IMPORTANT)
+        if (taskData.status === "completed") {
+          updateData.completed_at = new Date().toISOString();
+        } else if (taskData.status) {
+          updateData.completed_at = null;
+        }
+
 
       const { data, error } = await supabase
         .from('tasks')
