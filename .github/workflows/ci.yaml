@@ -32,11 +32,14 @@ jobs:
         run: |
             cd frontend
             npm run lint
+        # Fail the workflow if linting fails
+        continue-on-error: false
 
       - name: Run frontend tests
         run: |
             cd frontend
             npm run test
+        continue-on-error: false
 
       - name: Build frontend with Vite
         run: |
@@ -64,9 +67,11 @@ jobs:
         run: |
           cd backend
           npm run lint
+        continue-on-error: false
 
       - name: Run backend tests
         run: |
           cd backend
           npm run test
+        continue-on-error: false
 
