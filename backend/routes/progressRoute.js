@@ -33,7 +33,8 @@ router.get("/summary", async (req, res) => {
       pendingTasks,
       completionRate,
     });
-  } catch (err) {
+  } catch (error) {
+    console.log(error)
     res.status(500).json({ error: "Failed to load progress summary" });
   }
 });
@@ -65,7 +66,8 @@ router.get("/weekly", async (req, res) => {
       totalCompleted: data.length,
       completedByDay,
     });
-  } catch (err) {
+  } catch (error) {
+    console.log(error)
     res.status(500).json({ error: "Failed to load weekly progress" });
   }
 });
@@ -97,7 +99,8 @@ router.get("/daily", async (req, res) => {
         completedAt: task.completed_at, // keep frontend contract
       })),
     });
-  } catch (err) {
+  } catch (error) {
+    console.log(error)
     res.status(500).json({ error: "Failed to load daily progress" });
   }
 });

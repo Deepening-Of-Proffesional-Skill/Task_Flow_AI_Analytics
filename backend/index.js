@@ -14,7 +14,7 @@ import tasksRouter from './routes/taskModificationRoute.js';
 //import the searchTasks router
 import searchTasksRouter from './routes/searchTasks.js';
 // import progressRouter router
-import progressRouter from "./routes/progressRoute.js";
+//import progressRouter from "./routes/progressRoute.js";
 
 //configure environment variables
 dotenv.config();
@@ -59,7 +59,7 @@ app.get('/health', (req, res) => {
 });
 
 // Error handling middleware
-app.use((err, req, res, next) => {
+app.use((err, res) => {
   console.error('Unhandled error:', err);
   res.status(500).json({
     success: false,

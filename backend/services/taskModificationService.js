@@ -1,7 +1,7 @@
 // backend/services/taskService.js
 import supabase from '../config/supabaseClient.js';
 import { validateTaskInput } from '../validations/taskModValidation.js';
-import { formatDateForDatabase, formatDateForResponse } from '../utils/taskModificationdateHelper.js';
+import {formatDateForResponse } from '../utils/taskModificationdateHelper.js';
 
 class TaskService {
   async getAllTasks(userId) {
