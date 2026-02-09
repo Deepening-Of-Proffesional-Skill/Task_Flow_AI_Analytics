@@ -10,6 +10,19 @@ const apiService = axios.create({
   },
 });
 
+// Request interceptor to add auth token to all requests
+apiService.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 // Response interceptor for better error handling
 apiService.interceptors.response.use(
@@ -20,11 +33,18 @@ apiService.interceptors.response.use(
       switch (error.response.status) {
         case 401:
           console.error('Unauthorized - Please login');
-          // Optionally redirect to login or clear token
+          // Clear token and redirect to login only if not already on home/login page
           localStorage.removeItem('authToken');
+          if (window.location.pathname !== '/' && window.location.pathname !== '/home') {
+            window.location.href = '/';
+          }
           break;
         case 403:
           console.error('Forbidden - Invalid token');
+          localStorage.removeItem('authToken');
+          if (window.location.pathname !== '/' && window.location.pathname !== '/home') {
+            window.location.href = '/';
+          }
           break;
         case 404:
           console.error('Resource not found');
