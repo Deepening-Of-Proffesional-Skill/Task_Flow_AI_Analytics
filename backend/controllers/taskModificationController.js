@@ -4,7 +4,7 @@ import taskService from '../services/taskModificationService.js';
 class TaskController {
   async getAllTasks(req, res) {
     try {
-      const userId = 'default-user'; // Placeholder until auth is implemented
+      const userId = req.user.id; // Get authenticated user ID from middleware
       const tasks = await taskService.getAllTasks(userId);
       
       res.status(200).json({
@@ -25,7 +25,7 @@ class TaskController {
   async getTaskById(req, res) {
     try {
       const { id } = req.params;
-      const userId = 'default-user'; // Placeholder until auth is implemented
+      const userId = req.user.id; // Get authenticated user ID from middleware
       
       const task = await taskService.getTaskById(id, userId);
       
@@ -45,7 +45,7 @@ class TaskController {
 
   async createTask(req, res) {
     try {
-      const userId = 'default-user'; // Placeholder until auth is implemented
+      const userId = req.user.id; // Get authenticated user ID from middleware
       const taskData = req.body;
       
       // Ensure user can only create tasks for themselves
@@ -77,7 +77,7 @@ class TaskController {
   async updateTask(req, res) {
     try {
       const { id } = req.params;
-      const userId = 'default-user'; // Placeholder until auth is implemented
+      const userId = req.user.id; // Get authenticated user ID from middleware
       const taskData = req.body;
       
       const task = await taskService.updateTask(id, taskData, userId);
@@ -114,7 +114,7 @@ class TaskController {
   async deleteTask(req, res) {
     try {
       const { id } = req.params;
-      const userId = 'default-user'; // Placeholder until auth is implemented
+      const userId = req.user.id; // Get authenticated user ID from middleware
       
       await taskService.deleteTask(id, userId);
       
@@ -142,7 +142,7 @@ class TaskController {
 
   async getTaskStats(req, res) {
     try {
-      const userId = 'default-user'; // Placeholder until auth is implemented
+      const userId = req.user.id; // Get authenticated user ID from middleware
       const stats = await taskService.getTaskStats(userId);
       
       res.status(200).json({
