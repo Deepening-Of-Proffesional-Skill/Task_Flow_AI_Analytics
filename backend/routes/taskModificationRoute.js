@@ -1,27 +1,28 @@
 // backend/routes/tasks.js
 import express from 'express';
 import taskController from '../controllers/taskModificationController.js';
+import { authenticateToken } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// Note: Authentication will be added by my team member
+// All routes are protected - authentication required
 
 // GET /tasks - Get all tasks for authenticated user
-router.get('/', taskController.getAllTasks);
+router.get('/', authenticateToken, taskController.getAllTasks);
 
 // GET /tasks/stats - Get task statistics for authenticated user
-router.get('/stats', taskController.getTaskStats);
+router.get('/stats', authenticateToken, taskController.getTaskStats);
 
 // GET /tasks/:id - Get specific task
-router.get('/:id', taskController.getTaskById);
+router.get('/:id', authenticateToken, taskController.getTaskById);
 
 // POST /tasks - Create new task
-router.post('/', taskController.createTask);
+router.post('/', authenticateToken, taskController.createTask);
 
 // PUT /tasks/:id - Update task
-router.put('/:id', taskController.updateTask);
+router.put('/:id', authenticateToken, taskController.updateTask);
 
 // DELETE /tasks/:id - Delete task
-router.delete('/:id', taskController.deleteTask);
+router.delete('/:id', authenticateToken, taskController.deleteTask);
 
 export default router;

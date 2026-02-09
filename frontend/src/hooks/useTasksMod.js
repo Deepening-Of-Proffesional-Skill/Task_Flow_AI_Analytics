@@ -22,7 +22,11 @@ export const useTasks = () => {
   };
 
   useEffect(() => {
-    fetchTasks();
+    // Only fetch tasks if user is authenticated
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      fetchTasks();
+    }
   }, []);
 
   return { tasks, loading, error, refetch: fetchTasks };
