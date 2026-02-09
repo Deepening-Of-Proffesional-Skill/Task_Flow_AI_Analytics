@@ -1,5 +1,6 @@
 // frontend/src/pages/Dashboard.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TaskForm from '../components/TaskModForm';
 import TaskList from '../components/TaskModList';
 import { useTaskContext } from '../context/TaskContext';
@@ -7,6 +8,15 @@ import '../css/ModifyDashboard.css';
 
 const Dashboard = () => {
   const { tasks, loading, error, refetch } = useTaskContext();
+  const navigate = useNavigate();
+
+  // Authentication check
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      navigate('/'); // Redirect to login if no token is found
+    }
+  }, [navigate]);
 
   return (
     <div className="modify-dashboard">
