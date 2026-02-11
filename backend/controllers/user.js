@@ -142,6 +142,7 @@ export const getProfile = async (req, res) => {
       decoded = jwt.verify(token, SECRET);
       console.log("Decoded JWT:", decoded);
     } catch (err) {
+      console.log(err)
       //If verification fails, return 401 Unauthorized
       return res.status(401).json({ error: "Invalid or expired token" });
     }
