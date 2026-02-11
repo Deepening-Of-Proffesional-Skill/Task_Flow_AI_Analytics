@@ -18,14 +18,6 @@ export default function DailyTasks({ sortedTasks }) {
         return groups;
     }, {});
 
-    //priority sorting
-    const getPriorityBadge = (priority) => {
-        if (priority === 3) return { variant: "danger", label: "High" };
-        if (priority === 2) return { variant: "warning", label: "Medium" };
-        if (priority === 1) return { variant: "secondary", label: "Low" };
-        return { variant: "dark", label: "None" };
-    };
-
   return (
     <Container className="tasks-wrapper">
         {sortedTasks.length > 0 ? (            
