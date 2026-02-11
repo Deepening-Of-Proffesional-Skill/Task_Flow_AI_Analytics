@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Card, Container, Row, Col, Badge  } from 'react-bootstrap';
+import { Card, Container} from 'react-bootstrap';
 import NoTasks from "./NoTasks";
 import TaskCard from "./TaskCard";
 
