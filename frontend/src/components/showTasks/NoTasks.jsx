@@ -1,8 +1,15 @@
 import React from 'react'
 import { Card, Button } from 'react-bootstrap';
 import '../../css/NoTasks.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function NoTasks() {
+    const navigate = useNavigate();
+
+    const navigateCreateTask = () => {
+        navigate('/addTasks');
+    }
+        
   return (
     <Card className="no-tasks-card mt-5 pt-2">
         <Card.Body className="text-center py-5">
@@ -18,6 +25,7 @@ export default function NoTasks() {
                 variant="primary" 
                 size="lg" 
                 className="no-tasks-create-btn"
+                onClick={navigateCreateTask}
             >
                 <i className="bi bi-plus-lg me-2"></i>
                 Create Your First Task

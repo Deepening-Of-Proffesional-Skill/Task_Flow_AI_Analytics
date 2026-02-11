@@ -36,7 +36,7 @@
 
 .task-card-title {
   color: #f8f9fa;
-  font-size: 1.35rem;
+  font-size: 2rem !important;
   font-weight: 600;
   margin-bottom: 0.9rem;
   letter-spacing: -0.3px;
@@ -51,12 +51,42 @@
   gap: 0.8rem;
 }
 
-.task-card-status {
-  padding: 0.35rem 0.9rem;
-  border-radius: 50px;
-  font-size: 0.85rem;
+.task-badge {
   font-weight: 600;
-  color: #fff;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  border: 1px solid;
+  background: transparent !important;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  text-align: center;
+}
+
+.status-pending,
+.status-not-started { border-color: #6c757d; color: #adb5bd; }
+.status-in-progress { border-color: #0dcaf0; color: #0dcaf0; }
+.status-completed   { border-color: #198754; color: #198754; }
+.status-unknown     { border-color: #495057; color: #6c757d; }
+
+.priority-low    { border-color: #6c757d; color: #adb5bd; }
+.priority-medium { border-color: #ffc107; color: #ffc107; }
+.priority-high   { border-color: #dc3545; color: #dc3545; font-weight: 700; }
+.priority-none   { border-color: #495057; color: #6c757d; }
+
+.category-work     { border-color: #0d6efd; color: #0d6efd; }      
+.category-personal { border-color: #6610f2; color: #6610f2; }      
+.category-shopping { border-color: #fd7e14; color: #fd7e14; }      
+.category-study    { border-color: #20c997; color: #20c997; }      
+.category-other    { border-color: #6f42c1; color: #6f42c1; }      
+.category-none     { border-color: #495057; color: #6c757d; }
+
+.task-badge:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  transform: scale(1.05);
 }
 
 .status-pending       { background: #6c757d; }
@@ -71,13 +101,10 @@
   color: #fff;
 }
 
-.priority-low    { background: #6c757d; }
-.priority-medium { background: #ffc107; color: #000; }
-.priority-high   { background: #dc3545; }
-
 .task-card-separator {
   color: #555;
-  font-weight: bold;
+  font-weight: normal;
+  font-size: 1.1rem;
 }
 
 .task-card-due {
