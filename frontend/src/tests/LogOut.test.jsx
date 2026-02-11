@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import Logout from "../components/Logout";
+import LogOut from "../components/Logout.jsx";
 
 /*
   beforeEach runs BEFORE every test.
@@ -58,7 +58,7 @@ describe("Logout Component", () => {
   test("renders logout button", () => {
     render(
       <BrowserRouter>
-        <Logout />
+        <LogOut />
       </BrowserRouter>
     );
 
@@ -76,7 +76,7 @@ describe("Logout Component", () => {
 
     render(
       <BrowserRouter>
-        <Logout />
+        <LogOut />
       </BrowserRouter>
     );
 
@@ -105,7 +105,7 @@ describe("Logout Component", () => {
 
     render(
       <BrowserRouter>
-        <Logout />
+        <LogOut />
       </BrowserRouter>
     );
 
@@ -131,7 +131,7 @@ describe("Logout Component", () => {
 
     render(
       <BrowserRouter>
-        <Logout />
+        <LogOut />
       </BrowserRouter>
     );
 
@@ -171,7 +171,7 @@ describe("Logout Component", () => {
 
     render(
       <BrowserRouter>
-        <Logout />
+        <LogOut />
       </BrowserRouter>
     );
 
@@ -195,7 +195,7 @@ describe("Logout Component", () => {
 
     render(
       <BrowserRouter>
-        <Logout />
+        <LogOut />
       </BrowserRouter>
     );
 
