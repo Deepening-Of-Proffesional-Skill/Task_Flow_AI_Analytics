@@ -13,6 +13,7 @@ import DailyProgress from "./pages/DailyProgress";
 import WeeklyProgress from "./pages/WeeklyProgress";
 import OverallProgress from "./pages/OverallProgress";
 import WeeklyDayDetails from "./pages/WeeklyDayDetails";
+import ProfilePage from "./components/Profile";
 
 
 
@@ -34,6 +35,8 @@ function App() {
             <Route path="/productivityReports/weekly" element={<WeeklyProgress />} />
             <Route path="/productivityReports/overall" element={<OverallProgress />} />
             <Route path="/productivityReports/weekly/:day" element={<WeeklyDayDetails />} />
+            <Route path="/profile" element={<ProfilePage />} />
+
 
 
 
