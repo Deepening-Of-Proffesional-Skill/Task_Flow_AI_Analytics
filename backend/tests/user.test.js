@@ -41,6 +41,15 @@ const app = express();
 app.use(express.json());
 app.use("/user", router);
 
+beforeAll(() => {
+  jest.spyOn(console, "log").mockImplementation(() => {});
+  jest.spyOn(console, "error").mockImplementation(() => {});
+});
+afterAll(() => {
+  jest.restoreAllMocks();
+});
+
+
 //test login api
 
 describe("POST /user/login", () => {
