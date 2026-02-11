@@ -7,7 +7,7 @@ import '../../css/tabs.css';
 import SearchTasks from "./SearchTasks";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { fetchTasks } from "./fetchAllTasksService";
+import { fetchTasks } from "./services/fetchAllTasksService";
 
 export default function Home() {
     const [activeTab, setActiveTab] = useState('daily');

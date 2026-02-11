@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Container, Dropdown, DropdownItem, Form, InputGroup, Row, Card, Button} from 'react-bootstrap'
 import { useState } from 'react';
 import '../../css/SearchTasks.css';
-import { searchTasksService } from './searchedTasksService';
+import { searchTasksService } from './services/searchedTasksService';
 import TaskCard from './TaskCard';
 
 export default function SearchTasks() {
