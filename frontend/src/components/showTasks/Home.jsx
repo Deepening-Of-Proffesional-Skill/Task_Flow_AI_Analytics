@@ -99,7 +99,7 @@ export default function Home() {
     ];
 
     // Sort tasks by due date
-    const sortedTasks = [...(allTasks.length ? allTasks : tasks)].sort(
+    const sortedTasks = [...allTasks].sort(
         (a, b) => new Date(a.deadline) - new Date(b.deadline)
     );
 

@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Card, Container  } from 'react-bootstrap';
+import { Card, Container, Row, Col, Badge  } from 'react-bootstrap';
 import NoTasks from "./NoTasks";
+import TaskCard from "./TaskCard";
 
 export default function DailyTasks({ sortedTasks }) {
     const groupedByDate = sortedTasks.reduce((groups, task) => {
@@ -17,6 +18,14 @@ export default function DailyTasks({ sortedTasks }) {
         return groups;
     }, {});
 
+    //priority sorting
+    const getPriorityBadge = (priority) => {
+        if (priority === 3) return { variant: "danger", label: "High" };
+        if (priority === 2) return { variant: "warning", label: "Medium" };
+        if (priority === 1) return { variant: "secondary", label: "Low" };
+        return { variant: "dark", label: "None" };
+    };
+
   return (
     <Container className="tasks-wrapper">
         {sortedTasks.length > 0 ? (            
@@ -24,19 +33,12 @@ export default function DailyTasks({ sortedTasks }) {
                 <Card key={date} className="mb-4">
                     <Card.Body>
                         <div className="due-date">
+                            <i className="bi bi-calendar-event me-2"></i>                           
                             {date}
                         </div>
                         <div className='d-flex flex-column gap-3'>
                             {groupedByDate[date].map((task) => (
-                                <div key={task.id} className="task-item border rounded">
-                                    <Card.Title className="mb-1">
-                                        {task.title}
-                                    </Card.Title>
-                                
-                                    <Card.Subtitle className="d-flex align-items-center gap-2">
-                                        <span className="title">{task.status}</span>
-                                    </Card.Subtitle>
-                                </div>
+                                <TaskCard key={task.id} task={task} />
                             ))}
                         </div>
                     </Card.Body>

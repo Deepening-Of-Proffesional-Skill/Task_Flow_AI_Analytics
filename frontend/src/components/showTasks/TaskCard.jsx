@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card } from 'react-bootstrap';
+import { Card, Badge } from 'react-bootstrap';
 import '../../css/TaskCard.css';
 import PropTypes from 'prop-types';
 
@@ -22,14 +22,20 @@ export default function TaskCard({ task }) {
     <Card className="task-card mb-4 m-3" >
         <Card.Body className="task-card-body">
             <Card.Title className="task-card-title">{task.title}</Card.Title>
-            <Card.Subtitle className="task-card-subtitle mb-3">
-                <span className={`task-card-status status-${getStatusLabel(task.status).toLowerCase().replace(' ', '-')}`}>
+            <Card.Subtitle className="task-card-subtitle mb-3 d-flex align-items-center gap-3 flex-wrap">
+                <Badge 
+                    bg="transparent"
+                    className={`task-badge status-${getStatusLabel(task.status).toLowerCase().replace(' ', '-')}`}
+                >
                     {getStatusLabel(task.status) || 'Unknown'}
-                </span>
+                </Badge>
                 <span className="task-card-separator">•</span>
-                <span className={`task-card-priority priority-${getPriorityLabel(task.priority).toLowerCase()}`}>
+                <Badge 
+                    bg="transparent"
+                    className={`task-badge priority-${getPriorityLabel(task.priority).toLowerCase()}`}
+                >
                     Priority: {getPriorityLabel(task.priority) || 'None'}
-                </span>
+                </Badge>
                 <span className="task-card-separator">•</span>
                 <span className="task-card-due">
                     Due: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'No Due Date'}
