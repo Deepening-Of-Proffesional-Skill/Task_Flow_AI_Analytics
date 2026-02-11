@@ -8,7 +8,6 @@ export async function cohereAIInsightsController(req, res) {
         }
         const insights =  await cohereAIInsightsService(userId);
         return res.status(200).json({
-            message: 'AI insights generated successfully',
             insights: insights 
         });
     } catch (error) {
