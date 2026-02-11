@@ -77,6 +77,12 @@
 .priority-high   { border-color: #dc3545; color: #dc3545; font-weight: 700; }
 .priority-none   { border-color: #495057; color: #6c757d; }
 
+.category-work     { border-color: #0d6efd; color: #0d6efd; }      
+.category-personal { border-color: #6610f2; color: #6610f2; }      
+.category-shopping { border-color: #fd7e14; color: #fd7e14; }      
+.category-study    { border-color: #20c997; color: #20c997; }      
+.category-other    { border-color: #6f42c1; color: #6f42c1; }      
+.category-none     { border-color: #495057; color: #6c757d; }
 
 .task-badge:hover {
   background: rgba(255, 255, 255, 0.06) !important;

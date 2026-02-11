@@ -17,6 +17,15 @@ export default function TaskCard({ task }) {
         if (status === 'completed') return 'Completed';
         return status;
     }
+    const getCategoryLabel = (category) => {
+        if (!category) return 'None';
+        if (category === 'work') return 'Work';
+        if (category === 'personal') return 'Personal';
+        if (category === 'shopping') return 'Shopping';
+        if (category === 'study') return 'Study';
+        if (category === 'other') return 'Other';        
+        return category;
+    };
 
   return (
     <Card className="task-card mb-4 m-3" >
@@ -35,6 +44,13 @@ export default function TaskCard({ task }) {
                     className={`task-badge priority-${getPriorityLabel(task.priority).toLowerCase()}`}
                 >
                     Priority: {getPriorityLabel(task.priority) || 'None'}
+                </Badge>
+                <span className="task-card-separator">•</span>
+                <Badge 
+                    bg="transparent"
+                    className={`task-badge category-${getCategoryLabel(task.category).toLowerCase()}`}
+                >
+                    Category: {getCategoryLabel(task.category) || 'None'}
                 </Badge>
                 <span className="task-card-separator">•</span>
                 <span className="task-card-due">
@@ -56,5 +72,6 @@ TaskCard.propTypes = {
         priority: PropTypes.number,
         deadline: PropTypes.string,
         description: PropTypes.string,
+        category: PropTypes.string,
     }).isRequired,
 };
