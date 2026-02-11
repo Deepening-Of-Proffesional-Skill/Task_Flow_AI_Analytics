@@ -95,7 +95,7 @@ const LogIn = () => {
                   </div>
                 </Form>
                 <div className="text-center mt-3">
-                  <p className="signin-footer-text">
+                  <p className="signin-footer-text text-white">
                     Don&apos;t have an account?{" "}
                     <Link to="/signup" className="signin-link">
                       Sign Up
