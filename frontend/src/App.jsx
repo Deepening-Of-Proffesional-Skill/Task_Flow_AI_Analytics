@@ -14,7 +14,7 @@ import WeeklyProgress from "./pages/WeeklyProgress";
 import OverallProgress from "./pages/OverallProgress";
 import WeeklyDayDetails from "./pages/WeeklyDayDetails";
 import ProfilePage from "./components/Profile";
-
+import AIInsights from "./components/AIInsights.jsx";
 
 
 
@@ -36,6 +36,7 @@ function App() {
             <Route path="/productivityReports/overall" element={<OverallProgress />} />
             <Route path="/productivityReports/weekly/:day" element={<WeeklyDayDetails />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/aiinsights" element={<AIInsights />} />
 
 
 
