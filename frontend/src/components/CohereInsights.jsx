@@ -29,9 +29,20 @@ export default function CohereInsights() {
 
   return (
     <Container>
-        <div className='cohere-data-carddiv'>
-            <p>See data in console log for now. Will add UI later.</p>
-        </div>
+        {loading ? (
+            <p>Loading AI analytics...</p>
+        ) : error ? (
+            <p className="text-danger">Error loading AI analytics: {error.message}</p>
+        ) : analyticsData.insights > 0? (
+            <div className='cohere-data-card-div'>
+                <p>See data in console log for now. Will add UI later.</p>
+            </div>
+        ) : (
+            <div className='cohere-data-card-div'>
+                <p>{analyticsData?.message}</p>
+            </div>
+        )}
+        
     </Container>
     
   )
