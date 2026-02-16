@@ -14,7 +14,9 @@ import tasksRouter from './routes/taskModificationRoute.js';
 //import the searchTasks router
 import searchTasksRouter from './routes/searchTasks.js';
 // import progressRouter router
-//import progressRouter from "./routes/progressRoute.js";
+//import progressRouter from "./routes/progressRoute.js"
+// import cohere AI insights router
+import cohereAIInsightsRouter from './routes/cohereAIInsightsRoute.js';
 
 //configure environment variables
 dotenv.config();
@@ -43,6 +45,8 @@ app.use('/tasks', tasksRouter);
 app.use('/searchTasks', searchTasksRouter);
 // get progress reports
 app.use("/api/progress", progressRoute);
+// generate AI insights using cohere API
+app.use('/ai-insights-cohere', cohereAIInsightsRouter);
 
 
 app.get('/', (req, res) => {
