@@ -1,3 +1,10 @@
+// Mock Supabase client before importing anything else
+jest.mock('../config/supabaseClient.js', () => ({
+  default: {
+    from: jest.fn()
+  }
+}));
+
 import taskController from '../controllers/taskModificationController.js';
 import taskService from '../services/taskModificationService.js';
 
