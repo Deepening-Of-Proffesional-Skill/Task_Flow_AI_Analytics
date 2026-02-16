@@ -118,3 +118,61 @@ export const logOutUser = async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const getProfile = async (req, res) => {
+  try {
+    console.log("Incoming headers:", req.headers);
+    //extract the Authorization header
+    const authHeader = req.headers.authorization;
+
+    //Check if the header exists and starts with Bearer
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      //If missing or incorrect format, return 401 Unauthorized
+      return res.status(401).json({ error: "Authorization token missing" });
+    }
+
+    //Split the header to get the actual token string
+    const token = authHeader.split(" ")[1];
+    console.log("Received token:", token);
+    let decoded;
+
+    try {
+      //Verify the JWT using the server's secret
+      // hrows error if token is invalid or expired
+      decoded = jwt.verify(token, SECRET);
+      console.log("Decoded JWT:", decoded);
+    } catch (err) {
+      console.log(err)
+      //If verification fails, return 401 Unauthorized
+      return res.status(401).json({ error: "Invalid or expired token" });
+    }
+
+    //Extract user ID from the decoded JWT payload
+    const userId = decoded.id;
+    console.log("User ID from JWT:", userId);
+
+    //Fetch the user details from Supabase using admin privileges requires service role key in supabase client
+    const { data, error } = await supabase.auth.admin.getUserById(userId);
+
+    //If Supabase returns an error, respond with 400 and the message
+    if (error) {
+      return res.status(400).json({ error: error.message });
+    }
+
+    //Return a successful response with user profile details
+    return res.status(200).json({
+      message: "User profile fetched successfully",
+      user: {
+        id: data.user.id, //Unique user ID
+        email: data.user.email, //User email
+        full_name: data.user.user_metadata.full_name, //Full name from metadata
+        phone_number: data.user.user_metadata.phone_number, //Phone number from metadata
+        created_at: data.user.created_at, //Account creation timestamp
+      },
+    });
+  } catch (err) {
+    //Catch any unexpected errors and respond with 500 Internal Server Error
+    console.error(err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};

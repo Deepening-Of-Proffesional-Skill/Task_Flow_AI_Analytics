@@ -1,6 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import progressRoute from "./routes/progressRoute.js";
+
 
 //import the user router
 import userRouter from './routes/user.js';
@@ -11,6 +13,10 @@ import authRoutes from "./middleware/auth.js";
 import tasksRouter from './routes/taskModificationRoute.js';
 //import the searchTasks router
 import searchTasksRouter from './routes/searchTasks.js';
+// import progressRouter router
+//import progressRouter from "./routes/progressRoute.js"
+// import cohere AI insights router
+import cohereAIInsightsRouter from './routes/cohereAIInsightsRoute.js';
 
 //configure environment variables
 dotenv.config();
@@ -37,6 +43,11 @@ app.use("/auth", authRoutes);
 app.use('/tasks', tasksRouter);
 //register the searchTasks router
 app.use('/searchTasks', searchTasksRouter);
+// get progress reports
+app.use("/api/progress", progressRoute);
+// generate AI insights using cohere API
+app.use('/ai-insights-cohere', cohereAIInsightsRouter);
+
 
 app.get('/', (req, res) => {
   res.send('Welcome to the backend server!');
@@ -52,7 +63,7 @@ app.get('/health', (req, res) => {
 });
 
 // Error handling middleware
-app.use((err, req, res, next) => {
+app.use((err, res) => {
   console.error('Unhandled error:', err);
   res.status(500).json({
     success: false,

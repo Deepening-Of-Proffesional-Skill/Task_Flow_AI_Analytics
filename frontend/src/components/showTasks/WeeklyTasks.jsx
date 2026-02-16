@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Card, Container } from "react-bootstrap";
 import { getWeekYear } from "../../utils/weekUtils";
 import NoTasks from "./NoTasks";
+import TaskCard from "./TaskCard";
 
 export default function WeeklyTasks({ sortedTasks }) {
     const groupedByWeek = sortedTasks.reduce((groups, task) => {
@@ -23,21 +24,14 @@ export default function WeeklyTasks({ sortedTasks }) {
             Object.entries(groupedByWeek).map(([key, group]) => (
                 <Card key={key} className="mb-4">
                     <Card.Body>
-                        <div className="due-date">
+                        <div className="week-label">
+                            <i className="bi bi-calendar-week me-3"></i>
                             {group.label}
                         </div>
 
                         <div className='d-flex flex-column gap-2'>
                             {group.tasks.map((task) => (
-                                <div key={task.id} className="task-item  border rounded">
-                                    <Card.Title className="mb-1">
-                                        {task.title}
-                                    </Card.Title>
-
-                                    <Card.Subtitle className="d-flex align-items-center gap-2">
-                                        <span >{task.status}</span>
-                                    </Card.Subtitle>
-                                </div>
+                                <TaskCard key={task.id} task={task} />
                             ))}
                         </div>
                     </Card.Body>

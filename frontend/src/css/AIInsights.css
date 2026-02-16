@@ -1,0 +1,84 @@
+.analytics-header {
+    background: linear-gradient(135deg, #1e2338 0%, #141822 100%);
+    border-radius: 16px;
+    padding: 2.25rem 2rem;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.analytics-header h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    color: #00d4ff;
+    margin-bottom: 0.75rem;
+}
+
+.analytics-header p {
+    color: #dbddde !important;
+    font-size: 1rem;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.model-selector {
+    margin-top: 3rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.model-selector .form-label {
+    color: #ced4da;
+    font-size: 0.98rem;
+    font-weight: 500;
+    text-align: center !important;
+}
+
+.model-selector .form-select {
+    background-color: #212529;
+    color: #e9ecef;
+    border: 1px solid #495057;
+    padding: 0.65rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.model-selector .form-select:focus {
+    border-color: #0dcaf0;           /* matches your TaskCard status-in-progress */
+    box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.22);
+    outline: none;
+}
+
+.model-selector .form-select option {
+    background-color: #212529;
+    color: #e9ecef;
+}
+.content-area p {
+    margin-top: 3rem;
+    display: flex;
+    gap: 2rem;
+    color: #e9ecef !important;
+}
+/* Mobile / narrow screens — already stacked, just better spacing */
+@media (max-width: 768px) {
+    .analytics-header {
+        padding: 1.8rem 1.4rem;
+        text-align: center;
+    }
+  
+  .analytics-header h1 {
+        font-size: 2.1rem;
+  }
+  
+  .analytics-header p {
+        font-size: 1rem;
+  }
+  
+  .model-selector {
+        max-width: 100% !important;
+  }
+}
