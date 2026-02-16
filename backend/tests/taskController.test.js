@@ -269,6 +269,69 @@ describe('Task Controller - CRUD Operations', () => {
       });
     });
   });
+// ==================== DELETE TASK TESTS ====================
+  describe('DELETE - deleteTask', () => {
+    it('should delete a task successfully', async () => {
+      req.params.id = 'task-123';
+      taskService.deleteTask.mockResolvedValue(true);
 
-  
+      await taskController.deleteTask(req, res);
+
+      expect(taskService.deleteTask).toHaveBeenCalledWith('task-123', 'test-user-123');
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        success: true,
+        message: 'Task deleted successfully'
+      });
+    });
+
+    it('should return 404 error when deleting non-existent task', async () => {
+      req.params.id = 'non-existent-task';
+      taskService.deleteTask.mockRejectedValue(new Error('Task not found'));
+
+      await taskController.deleteTask(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({
+        success: false,
+        error: 'Task not found',
+        message: 'Task not found'
+      });
+    });
+
+    it('should return 500 error when database error occurs during deletion', async () => {
+      req.params.id = 'task-123';
+      taskService.deleteTask.mockRejectedValue(new Error('Database connection failed'));
+
+      await taskController.deleteTask(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({
+        success: false,
+        error: 'Internal server error',
+        message: 'Database connection failed'
+      });
+    });
+  });
+
+  // ==================== EDGE CASES & SECURITY TESTS ====================
+  describe('Security & Edge Cases', () => {
+    it('should ensure user can only access their own tasks', async () => {
+      const mockTasks = [
+        { id: 'task-1', user_id: 'test-user-123', title: 'User Task' }
+      ];
+
+      taskService.getAllTasks.mockResolvedValue(mockTasks);
+      await taskController.getAllTasks(req, res);
+
+      // Verify that the service was called with the authenticated user's ID
+      expect(taskService.getAllTasks).toHaveBeenCalledWith('test-user-123');
+      
+      // Verify that all returned tasks belong to the authenticated user
+      const returnedTasks = res.json.mock.calls[0][0].tasks;
+      returnedTasks.forEach(task => {
+        expect(task.user_id).toBe('test-user-123');
+      });
+    });
+  });
 });
