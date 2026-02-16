@@ -191,5 +191,84 @@ describe('Task Controller - CRUD Operations', () => {
     });
   });
 
- 
+  // ==================== UPDATE TASK TESTS ====================
+  describe('UPDATE - updateTask', () => {
+    it('should update a task successfully with valid data', async () => {
+      const mockUpdateData = {
+        title: 'Updated Task',
+        description: 'Updated Description',
+        priority: 'medium',
+        status: 'in-progress',
+        category: 'study'
+      };
+
+      const mockUpdatedTask = {
+        id: 'task-123',
+        user_id: 'test-user-123',
+        ...mockUpdateData,
+        updated_at: '2026-02-16T01:00:00.000Z'
+      };
+
+      req.params.id = 'task-123';
+      req.body = mockUpdateData;
+      taskService.updateTask.mockResolvedValue(mockUpdatedTask);
+
+      await taskController.updateTask(req, res);
+
+      expect(taskService.updateTask).toHaveBeenCalledWith('task-123', mockUpdateData, 'test-user-123');
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        success: true,
+        message: 'Task updated successfully',
+        task: mockUpdatedTask
+      });
+    });
+
+    it('should return 404 error when updating non-existent task', async () => {
+      req.params.id = 'non-existent-task';
+      req.body = { title: 'Updated Task', priority: 'high' };
+      taskService.updateTask.mockRejectedValue(new Error('Task not found'));
+
+      await taskController.updateTask(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({
+        success: false,
+        error: 'Task not found',
+        message: 'Task not found'
+      });
+    });
+
+    it('should return 400 error when update validation fails', async () => {
+      req.params.id = 'task-123';
+      req.body = { title: '' }; // Invalid data
+      taskService.updateTask.mockRejectedValue(new Error('Validation failed: Title is required'));
+
+      await taskController.updateTask(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.json).toHaveBeenCalledWith({
+        success: false,
+        error: 'Validation failed',
+        message: 'Validation failed: Title is required'
+      });
+    });
+
+    it('should return 500 error when database error occurs during update', async () => {
+      req.params.id = 'task-123';
+      req.body = { title: 'Updated Task', priority: 'high' };
+      taskService.updateTask.mockRejectedValue(new Error('Database connection failed'));
+
+      await taskController.updateTask(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({
+        success: false,
+        error: 'Internal server error',
+        message: 'Database connection failed'
+      });
+    });
+  });
+
+  
 });
