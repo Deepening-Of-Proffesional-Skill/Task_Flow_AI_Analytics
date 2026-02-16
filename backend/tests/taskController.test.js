@@ -87,5 +87,109 @@ describe('Task Controller - CRUD Operations', () => {
       });
     });
   });
+// ==================== READ TASKS TESTS ====================
+  describe('READ - getAllTasks', () => {
+    it('should get all tasks for authenticated user successfully', async () => {
+      const mockTasks = [
+        {
+          id: 'task-1',
+          user_id: 'test-user-123',
+          title: 'Task 1',
+          description: 'Description 1',
+          priority: 'high',
+          status: 'pending',
+          category: 'work'
+        },
+        {
+          id: 'task-2',
+          user_id: 'test-user-123',
+          title: 'Task 2',
+          description: 'Description 2',
+          priority: 'medium',
+          status: 'completed',
+          category: 'study'
+        }
+      ];
 
+      taskService.getAllTasks.mockResolvedValue(mockTasks);
+
+      await taskController.getAllTasks(req, res);
+
+      expect(taskService.getAllTasks).toHaveBeenCalledWith('test-user-123');
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        success: true,
+        tasks: mockTasks,
+        count: 2
+      });
+    });
+
+    it('should return empty array when user has no tasks', async () => {
+      taskService.getAllTasks.mockResolvedValue([]);
+
+      await taskController.getAllTasks(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        success: true,
+        tasks: [],
+        count: 0
+      });
+    });
+
+    it('should return 500 error when service fails', async () => {
+      taskService.getAllTasks.mockRejectedValue(new Error('Database error'));
+
+      await taskController.getAllTasks(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith({
+        success: false,
+        error: 'Internal server error',
+        message: 'Database error'
+      });
+    });
+  });
+
+  describe('READ - getTaskById', () => {
+    it('should get a specific task by id successfully', async () => {
+      const mockTask = {
+        id: 'task-123',
+        user_id: 'test-user-123',
+        title: 'Specific Task',
+        description: 'Specific Description',
+        priority: 'high',
+        status: 'pending',
+        category: 'work'
+      };
+
+      req.params.id = 'task-123';
+      taskService.getTaskById.mockResolvedValue(mockTask);
+
+      await taskController.getTaskById(req, res);
+
+      expect(taskService.getTaskById).toHaveBeenCalledWith('task-123', 'test-user-123');
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({
+        success: true,
+        task: mockTask
+      });
+    });
+
+    it('should return 404 error when task not found', async () => {
+      req.params.id = 'non-existent-task';
+      taskService.getTaskById.mockRejectedValue(new Error('Task not found'));
+
+      await taskController.getTaskById(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({
+        success: false,
+        error: 'Task not found',
+        message: 'Task not found'
+      });
+    });
+  });
+
+ 
 });
