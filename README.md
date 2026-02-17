@@ -232,26 +232,11 @@ cd backend
 npm test
 ```
 
-Test Coverage:
-- Task Controller (16 tests)
-- Fetch Tasks Controller (12 tests)
-- Search Tasks Controller (10 tests)
-- Cohere AI Insights (4 tests)
-- Token Verification (3 tests)
-- Middleware (1 test)
-- User Controller (1 test)
-
 **Frontend Tests (16 tests):**
 ```bash
 cd frontend
 npm test
 ```
-
-Test Coverage:
-- Login Component (4 tests)
-- Logout Component (6 tests)
-- Sign Up Component (2 tests)
-- Profile Page (4 tests)
 
 ### Linting
 
@@ -293,23 +278,6 @@ npm run lint
 - `POST /api/search` - Search and filter tasks
 - `GET /api/fetch` - Fetch filtered tasks
 
-## 🤝 Contributing
-
-We welcome contributions! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Contribution Guidelines
-
-- Write meaningful commit messages
-- Add tests for new features
-- Ensure all tests pass before submitting PR
-- Follow existing code style (ESLint configuration)
-- Update documentation as needed
 
 ## 📝 License
 
@@ -317,9 +285,11 @@ This project is licensed under the ISC License.
 
 ## 👥 Authors
 
-- **Glory Ozo** - Core Features & CRUD Operations
-- **Upeksha** - Testing Infrastructure
-- **Team Contributors** - Profile Features, AI Integration
+- **Archana Ojha**
+- **Ayomide Adeegbe**
+- **Glory Ozoji** 
+- **Upeksha Gulegodage**
+-
 
 ## 🙏 Acknowledgments
 
@@ -329,10 +299,3 @@ This project is licensed under the ISC License.
 - [React](https://react.dev) - UI library
 - [Express](https://expressjs.com) - Backend framework
 
-## 📧 Support
-
-For support, email your team or open an issue in the repository.
-
----
-
-**Built with ❤️ by the Task Flow AI Analytics Team**
