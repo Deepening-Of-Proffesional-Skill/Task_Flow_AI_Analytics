@@ -10,6 +10,8 @@ mock them and only test our controller logic.
 //supertest lets us call our API like a real frontend request
 import request from "supertest";
 import express from "express";
+import jwt from "jsonwebtoken";
+
 
 /**
 mock before importing anything that uses supabase or jwt
@@ -21,12 +23,16 @@ jest.mock("../utils/supabaseClient.js", () => ({
     //for login
     signInWithPassword: jest.fn(),
     signUp: jest.fn(), //for signup
+    admin:{
+      getUserById: jest.fn(),
+    }
   },
 }));
 
 //fake JWT
 jest.mock("jsonwebtoken", () => ({
   sign: jest.fn(() => "fake-jwt-token"), //always return this token
+  verify: jest.fn(),
 }));
 
 //import after mocks
@@ -120,3 +126,78 @@ describe("POST /user/signup", () => {
     expect(res.statusCode).toBe(400);
   });
 });
+
+
+//test profile api
+describe("GET /user/profile", () => {
+
+  //missing Authorization header
+  it("should return 401 if token missing", async () => {
+    const res = await request(app).get("/user/profile");
+
+    expect(res.statusCode).toBe(401);
+    expect(res.body.error).toBe("Authorization token missing");
+  });
+
+  //invalid token
+  it("should return 401 if token invalid", async () => {
+    jwt.verify.mockImplementation(() => {
+      throw new Error("Invalid token");
+    });
+
+    const res = await request(app)
+      .get("/user/profile")
+      .set("Authorization", "Bearer invalid-token");
+
+    expect(res.statusCode).toBe(401);
+    expect(res.body.error).toBe("Invalid or expired token");
+  });
+
+  //supabase error
+  it("should return 400 if Supabase returns error", async () => {
+    jwt.verify.mockReturnValue({ id: "123" });
+
+    supabase.auth.admin.getUserById.mockResolvedValue({
+      data: null,
+      error: { message: "User not found" },
+    });
+
+    const res = await request(app)
+      .get("/user/profile")
+      .set("Authorization", "Bearer valid-token");
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body.error).toBe("User not found");
+  });
+
+  //successful profile fetch
+  it("should return user profile successfully", async () => {
+    jwt.verify.mockReturnValue({ id: "123" });
+
+    supabase.auth.admin.getUserById.mockResolvedValue({
+      data: {
+        user: {
+          id: "123",
+          email: "test@mail.com",
+          created_at: "2024-01-01",
+          user_metadata: {
+            full_name: "Test User",
+            phone_number: "999999",
+          },
+        },
+      },
+      error: null,
+    });
+
+    const res = await request(app)
+      .get("/user/profile")
+      .set("Authorization", "Bearer valid-token");
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.message).toBe("User profile fetched successfully");
+    expect(res.body.user.email).toBe("test@mail.com");
+    expect(res.body.user.full_name).toBe("Test User");
+  });
+
+});
+
