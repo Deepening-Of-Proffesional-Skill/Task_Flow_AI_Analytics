@@ -1,3 +1,10 @@
+//mock supabase client
+jest.mock("../utils/supabaseClient", () => ({
+    default: {
+        from: jest.fn()
+    }
+}));
+
 import fetchTasks from "../services/fetchTasks";
 import getTasks from "../controllers/fetchTasks";
 

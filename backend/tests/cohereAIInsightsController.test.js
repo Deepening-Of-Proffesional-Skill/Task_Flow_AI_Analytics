@@ -1,3 +1,10 @@
+//mock supabase client
+jest.mock("../utils/supabaseClient", () => ({
+    default: {
+        from: jest.fn()
+    }
+}));
+
 import { cohereAIInsightsService } from "../services/cohereAIInsightsService.js";
 import { cohereAIInsightsController } from "../controllers/cohereAIInsightsController.js";
 
@@ -17,7 +24,7 @@ describe("Cohere AI Insights Controller", () => {
     beforeEach(() => {
         jest.clearAllMocks();
     });
-    
+
     //Test case to check if userId is not provided in req.user
     it("Should return 400 and error message when userId is not provided", async () => {
         const req = {
