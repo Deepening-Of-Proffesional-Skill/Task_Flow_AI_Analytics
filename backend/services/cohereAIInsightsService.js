@@ -77,7 +77,7 @@ export async function cohereAIInsightsService(userId) {
             insightsText = insightsText.replace(/```json/g, "").replace(/```/g, "").trim();
             const insights = JSON.parse(insightsText);
 
-            return { insights };
+            return  insights ;
 
         } catch (error) {
             console.error('Error generating insights cohere:', error);

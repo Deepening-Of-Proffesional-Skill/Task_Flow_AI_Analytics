@@ -11,7 +11,6 @@ export async function cohereAIInsightsController(req, res) {
             insights: insights 
         });
     } catch (error) {
-        console.error('Error generating AI insights:', error);
         return res.status(error.status || 500).json({ error: error.message || 'Internal server error' });
     }
 }
