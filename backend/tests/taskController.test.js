@@ -14,6 +14,15 @@ jest.mock('../services/taskModificationService.js');
 describe('Task Controller - CRUD Operations', () => {
   let req, res;
 
+  beforeAll(() => {
+    jest.spyOn(console, "error").mockImplementation(() => {});
+    jest.spyOn(console, "log").mockImplementation(() => {});
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+  
   beforeEach(() => {
     // Reset mocks before each test
     jest.clearAllMocks();
