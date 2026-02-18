@@ -43,8 +43,9 @@ export default function AIInsights() {
                 <p className="lead text-center text-muted py-5">
                     Select an AI model above to start analyzing your tasks...
                 </p>
-                ) : (
-                    <CohereAnalytics />
+                ) : ( aiModel === 'cohere' ? (
+                        <CohereAnalytics />
+                    ) : null
                 )
             }
             

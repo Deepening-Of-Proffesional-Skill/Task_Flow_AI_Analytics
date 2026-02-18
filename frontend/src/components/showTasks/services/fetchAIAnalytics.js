@@ -11,6 +11,6 @@ export const fetchAIAnalytics = async () => {
         return data;
     } catch(error){
         console.error("Error fetching AI analytics:", error);
-        throw error;
+        throw ("Failed to fetch AI analytics. Please try again later.");
     }
 }
