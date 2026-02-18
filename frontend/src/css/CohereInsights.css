@@ -1,48 +1,68 @@
+.loading-card {
+    background: linear-gradient(145deg, #3f434b, #0d0d0f) !important;
+    border: none  !important;
+    border-radius: 16px   !important;
+    overflow: hidden  !important;
+    text-align: center !important;
+    padding-bottom: 4%;
+}
+.loading-card p {
+    text-align: center !important;
+}
+
 .insight-card {
-  background: linear-gradient(145deg, #141418, #0f1218);
-  border: none;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.45),
+    background: linear-gradient(145deg, #141418, #0f1218);
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.45),
               inset 0 1px 0 rgba(255,255,255,0.02);
-  transition: transform 0.25s ease;
+    transition: transform 0.25s ease;
 }
 
 .insight-card:hover {
-  transform: translateY(-4px);
+    transform: translateY(-4px);
 }
 
 .insight-header {
-  background: rgba(13, 202, 240, 0.12); 
-  border-bottom: 1px solid rgba(13, 202, 240, 0.18);
-  padding: 1.1rem 1.5rem;
-  color: #0dcaf0;
+    background: rgba(13, 202, 240, 0.12); 
+    border-bottom: 1px solid rgba(13, 202, 240, 0.18);
+    padding: 1.1rem 1.5rem;
+    color: #0dcaf0;
 }
 
 .insight-header h5 {
-  font-weight: 600;
-  letter-spacing: -0.3px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
 }
 
 .insight-card h6 {
-  color: #e9ecef !important;         
-  font-weight: 600;                   
-  letter-spacing: 0.4px;              
-  margin-bottom: 0.75rem !important;   
+    color: #e9ecef !important;         
+    font-weight: 600;                   
+    letter-spacing: 0.4px;              
+    margin-bottom: 0.75rem !important;   
 }
 
 .insight-card .recommand-head {
-  color: #c0b44b !important;         
-  font-weight: 500;
-  font-size: 1.25rem;                   
-  letter-spacing: 0.3px;             
+    color: #c0b44b !important;         
+    font-weight: 500;
+    font-size: 1.25rem;                   
+    letter-spacing: 0.3px;             
 }
 
 .cohere-insights-container .text-light {
-  color: #e9ecef !important;
-  margin-top: 0%;
+    color: #e9ecef !important;
+    margin-top: 0%;
 }
 
 .cohere-insights-container .text-muted {
-  color: #adb5bd !important;
+    color: #adb5bd !important;
+}
+
+.error-message {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.2) !important;
+    padding: 1rem ;
+    border-radius: 8px !important;
+    text-align: center !important;
 }

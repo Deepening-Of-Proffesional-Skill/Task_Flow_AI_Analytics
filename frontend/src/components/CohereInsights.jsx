@@ -17,8 +17,7 @@ export default function CohereInsights() {
                 console.log("Cohere Analytics Response:", response);
                 setAnalyticsData(response);
             } catch (error) {
-                //setError(error);
-                setLoading(false);
+                setError("Error fetching data. Please try again later.");
             } finally {
                 setLoading(false);
             }
@@ -30,9 +29,19 @@ export default function CohereInsights() {
   return (
     <Container>
         {loading ? (
-            <p>Loading AI analytics...</p>
+            <div className="loading-card p-4">                
+                <p className="mt-4 fs-5  ">
+                    Analyzing your tasks with AI...
+                </p>
+                <p className="text-muted small ">
+                    This usually takes just a few seconds
+                </p>
+                <div className="spinner-border text-info" style={{ width: '3.5rem', height: '3.5rem' }} role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
         ) : error ? (
-            <p className="text-danger">Error loading AI analytics: {error.message}</p>
+            <p className="error-message">{error}</p>
         ) : analyticsData?.insights? (
             <Container fluid className="cohere-insights-container py-4">
                 <Row className="g-4">
