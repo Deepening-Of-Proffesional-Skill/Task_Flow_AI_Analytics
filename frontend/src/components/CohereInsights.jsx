@@ -17,7 +17,7 @@ export default function CohereInsights() {
                 console.log("Cohere Analytics Response:", response);
                 setAnalyticsData(response);
             } catch (error) {
-                setError("Error fetching data. Please try again later.");
+                setError(error);
             } finally {
                 setLoading(false);
             }
@@ -49,7 +49,7 @@ export default function CohereInsights() {
                     <Col lg={6}>
                         <Card className="insight-card h-100">
                             <Card.Header className="insight-header">
-                                <h5 className="mb-0">Today's Motivation</h5>
+                                <h5 className="mb-0">Today&apos;s Motivation</h5>
                             </Card.Header>
                             <Card.Body>
                                 {analyticsData.insights.motivational_messages.length > 0 ? (
