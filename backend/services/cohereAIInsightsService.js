@@ -50,7 +50,7 @@ export async function cohereAIInsightsService(userId) {
 
                 Guidelines:
                 - Analyze patterns in completion times, categories, and days of the week.
-                - Provide personalized tips and priority suggestions.
+                - Provide personalized tips and priority suggestions(not an object array) include also about overdue tasks.
                 - Predict weekly completion and provide recommendations.
                 - Include motivational messages.
                 - Return only JSON. Do not include explanations or comments.
