@@ -9,13 +9,13 @@ export async function cohereAIInsightsService(userId) {
             .select('*')
             .eq('user_id', userId);
 
-            if(!tasks || tasks.length === 0) {
-                return { message: 'No tasks found for the user', insights: [] };
-            }
             if (tasksError) {
                 throw tasksError;
             }
-
+            if(!tasks || tasks.length === 0) {
+                return { message: 'No tasks found for the user', insights: [] };
+            }
+            
             // generate AI insights using cohere API
 
             const systemPrompt = `
