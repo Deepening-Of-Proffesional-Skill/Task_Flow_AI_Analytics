@@ -12,7 +12,7 @@ export default function NoTasks() {
         
   return (
     <Card className="no-tasks-card mt-5 pt-2">
-        <Card.Body className="text-center py-5">
+        <Card.Body className="d-flex flex-column align-items-center py-5">
             <i className="bi bi-journal-x display-4 text-muted mb-4"></i>
             
             <h4 className="mb-3 text-light">You haven&apos;t created any tasks yet</h4>

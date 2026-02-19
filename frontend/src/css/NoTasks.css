@@ -11,6 +11,13 @@
   margin-top: 5rem !important;
 }
 
+.no-tasks-card p {
+  font-size: .9rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  color: #adb5bd !important;
+}
+
 .no-tasks-card:hover {
   transform: translateY(-12px);
   box-shadow: 
