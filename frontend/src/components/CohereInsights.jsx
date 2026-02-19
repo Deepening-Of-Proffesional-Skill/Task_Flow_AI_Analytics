@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Container, Row, Col, ListGroup, Badge, Card } from 'react-bootstrap';
 import {fetchAIAnalytics}  from './showTasks/services/fetchAIAnalytics.js';
 import '../css/CohereInsights.css';
+import NoTasks from './showTasks/NoTasks';
 
 export default function CohereInsights() {
     const [analyticsData, setAnalyticsData] = useState(null);
@@ -42,7 +43,12 @@ export default function CohereInsights() {
             </div>
         ) : error ? (
             <p className="error-message">{error}</p>
-        ) : analyticsData?.insights? (
+        ) : analyticsData?.insights?.message ? (
+            <div className='cohere-data-card-div'>
+                <p>{analyticsData?.insights?.message}</p>
+                <NoTasks />
+            </div>
+         ) : analyticsData?.insights && !analyticsData.message? (
             <Container fluid className="cohere-insights-container py-4">
                 <Row className="g-4">
                     {/* Motivational Messages */}
@@ -207,12 +213,7 @@ export default function CohereInsights() {
 
                 </Row>
             </Container>
-        ) : (
-            <div className='cohere-data-card-div'>
-                <p>{analyticsData?.message}</p>
-            </div>
-        )}
-        
+        ): null}        
     </Container>
     
   )
