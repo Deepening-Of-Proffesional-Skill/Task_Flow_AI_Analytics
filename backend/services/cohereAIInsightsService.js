@@ -54,6 +54,7 @@ export async function cohereAIInsightsService(userId) {
                 - Predict weekly completion and provide recommendations.
                 - Include motivational messages.
                 - Return only JSON. Do not include explanations or comments.
+                - priority 1 -> low, 2 -> medium, 3 -> high
 
             `
             const userContent = `Analyze these tasks and generate the JSON report as instructed.
