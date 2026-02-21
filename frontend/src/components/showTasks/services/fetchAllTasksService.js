@@ -4,7 +4,7 @@ export const fetchTasks = async () => {
     try {
         const token = localStorage.getItem('authToken');
 
-        const {data} = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/fetchAllTasks`, 
+        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/fetchAllTasks`, 
             {
                 headers: { Authorization: `Bearer ${token}` }
             }

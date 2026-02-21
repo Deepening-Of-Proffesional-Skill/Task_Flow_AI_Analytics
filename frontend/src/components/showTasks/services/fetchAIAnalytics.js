@@ -3,7 +3,7 @@ import axios from "axios";
 export const fetchAIAnalytics = async () => {
     try{
         const token = localStorage.getItem('authToken');
-        const {data} = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/ai-insights-cohere`,
+        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/ai-insights-cohere`,
             {
                 headers: { Authorization: `Bearer ${token}` }
             }
