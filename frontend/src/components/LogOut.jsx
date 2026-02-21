@@ -11,7 +11,7 @@ const Logout = () => {
     if (!confirmLogout) return;
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/user/logout`, {
+      const response = await fetch(`${process.env.VITE_API_URL}/user/logout`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("authToken")}`,
