@@ -32,6 +32,6 @@ export default defineConfig([
   },
 
   {
-    ignores: ["dist/", "build/", "node_modules/", "src/tests/**"],
+    ignores: ["dist/", "build/", "node_modules/"],
   },
 ]);
