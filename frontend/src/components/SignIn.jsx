@@ -33,7 +33,7 @@ const SignInForm = () => {
       return;
     }
     try {
-      const response = await axios.post(`${process.env.VITE_API_URL}/user/signup`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/signup`, {
         full_name: fullname,
         phone_number: phoneNumber,
         email: email,

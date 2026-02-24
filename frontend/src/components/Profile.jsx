@@ -17,7 +17,7 @@ const ProfilePage = () => {
 
     const fetchProfile = async () => {
       try {
-        const res = await fetch(`${process.env.VITE_API_URL}/user/profile`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/user/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
